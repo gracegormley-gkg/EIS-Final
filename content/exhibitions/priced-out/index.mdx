@@ -1,87 +1,64 @@
 ---
+import Annotations from '../../../components/annotations.client'
+
 title: Priced Out
-description: This is a homepage for EIS Archives.
-image: https://iiif.dc.library.northwestern.edu/iiif/3/138a94b0-175a-4152-98c7-df58661ce7d5/950,520,7100,4740/!1200,630/0/default.jpg
+description: The history of urban renewal in the United States.
 ---
 
-<header id="priced-out-banner" class="banner-image">
-  <div class="banner-text-center">
-    <h1>Priced Out</h1>
-    <p>
+<Annotations />
+
+<header id="priced-out-banner" className="banner-image">
+    <div className="banner-text-center">
+       <h1>Priced Out</h1>
+      <p>
         The history of urban renewal in the United States, as seen through these sources from the late 19th century to the early 1970s, reveals a consistent narrative of tension between modernization and community identity.
         While the term "gentrification" is rarely used in these 1970s documents, the mechanics—displacement of low-income populations, the demolition of "blighted" structures, and the push for higher-value commercial and residential use—form its foundational story.
-    </p>
-    <p>
+       </p>
+       <p>
         A major point of conflict in these stories across the U.S. is the struggle to define what is "historic" and worth saving.
-    </p>
-  </div>
+        </p>
+    </div>
 </header>
 
-<div>
-    <h2>The "Blight" Label</h2>
-    <p>In Honolulu and St. Joseph, renewal was driven by a desire to eliminate "blight" and "obsolescence." 
-    In Honolulu’s Chinatown, building inspectors classified structures as "substandard," justifying the clearance of 29 out of 37 buildings in the Pauahi area. 
-    Similarly, in St. Joseph, 63% of structures were deemed substandard to warrant clearance for a modernized "commercial center."</p>
+<div className="annotation full-width sticky-annotation">
+    <div className="photo-container">
+      <img src="/images/priced-out/borough-of-milton-illustrative-site-plan-1.webp" 
+        alt="Borough of Milton Illustrative Site Plan" 
+        className="anno-photo" />
+    </div>
+    <div className="annotation-text-holder">
+      <h2>The "Blight" Label</h2>
+      <p>
+        In Honolulu and St. Joseph, renewal was driven by a desire to eliminate "blight" and "obsolescence." In Honolulu's Chinatown, building inspectors classified structures as 
+        "substandard," justifying the clearance of 29 out of 37 buildings in the Pauahi area. Similarly, in St. Joseph, 63% of structures were deemed substandard to warrant clearance for a modernized "commercial center."
+      </p>
+    </div>
 </div>
 
-<div>
-    <h2>The Disaster Catalyst</h2>
-    <p>In Milton and Wilkes-Barre, Pennsylvania, the narrative was shifted by Tropical Storm Agnes in 1972. 
-    Here, urban renewal was framed as an urgent recovery effort. 
-    Because the flood had already damaged buildings, authorities used the disaster to accelerate "controlled clearance" and prevent future economic loss by relocating residents out of the 100-year flood plain.</p>
+<div className="annotation full-width sticky-annotation">
+    <div className="photo-container">
+      <img src="/images/priced-out/downtown-urban-renewal-area-plan.webp" 
+        alt="Downtown Urban Renewal Area Plan" 
+        className="anno-photo" />
+    </div>
+    <div className="annotation-text-holder">
+      <h2>The Disaster Catalyst</h2>
+      <p>
+        In Milton and Wilkes-Barre, Pennsylvania, the narrative was shifted by Tropical Storm Agnes in 1972. Here, urban renewal was framed as an urgent recovery effort. Because the flood had already damaged buildings, authorities used the disaster to accelerate "controlled clearance" and prevent future economic loss by relocating residents out of the 100-year flood plain.
+      </p>
+    </div>
 </div>
 
-<div>
-    <h2>The Human Cost</h2>
-    <p>Across all stories, the primary impact was the relocation of vulnerable populations, often defined by age, income, and ethnicity. 
-    In Honolulu, the population was predominantly elderly Filipino men, many of whom were retired plantation workers who viewed Chinatown as a "vacation" from their previous hard lives.
-    In Milton, a critical concern was the "plight of elderly widows" who lacked the funds to maintain flood-damaged property and faced high anxiety over leaving familiar neighborhoods.
-    Every project cited the Housing Act of 1949, promising "decent, safe, and sanitary" replacement housing.</p>
+<div className="annotation full-width sticky-annotation">
+    <div className="photo-container">
+      <img src="/images/priced-out/downtown-urban-renewal-area-plan.webp" 
+        alt="Downtown Urban Renewal Area Plan" 
+        className="anno-photo" />
+    </div>
+    <div className="annotation-text-holder">
+      <h2>The Human Cost</h2>
+      <p>
+Across all stories, the primary impact was the relocation of vulnerable populations, often defined by age, income, and ethnicity. In Honolulu, the population was predominantly elderly Filipino men, many of whom were retired plantation workers who viewed Chinatown as a "vacation" from their previous hard lives. In Milton, a critical concern was the "plight of elderly widows" who lacked the funds to maintain flood-damaged property and faced high anxiety over leaving familiar neighborhoods. Every project cited the Housing Act of 1949, promising "decent, safe, and sanitary" replacement housing.
+      </p>
+    </div>
 </div>
-
-<div>
-    <p>The elderly were a primary target for relocation across all documented sites, often facing significant psychological and financial stress.</p>
-    <ul>
-        <li>Honolulu, Hawaii: The Pauahi project area was home to a large population of elderly Filipino men, many of whom were retired plantation workers. 
-        Advocates argued that moving these men from their familiar neighborhood into high-rise towers would "totally destroy their lifestyle," forcing them into an "alien and impersonal setting."</li>
-        <li>Milton, Pennsylvania: Planners identified the "plight of elderly widows" as one of the most critical needs in the Milton South area. 
-        These residents suffered from a "great deal of anxiety" over leaving their family homes and lacked the funds or physical ability to maintain their properties after the flood.</li>
-        <li>St. Joseph, Missouri: This project area was characterized by a "high percentage of elderly residents" and very few younger families.</li>
-    </ul>
-</div>
-
-<div>
-    <p>The projects also frequently displaced individuals who lived in non-traditional housing arrangements, such as rooming houses or residential hotels.</p>
-    <ul>
-        <li>Wilkes-Barre, Pennsylvania: The relocation workload included 250 "non-housekeeping individuals of low income.” 
-        These residents were particularly vulnerable due to a general shortage of standard, affordable housing units following the Agnes disaster.</li>
-        <li>Honolulu, Hawaii: Besides the elderly, Chinatown served as a haven for other bachelor males, including students, laborers, and the unemployed, who were drawn to the area by low rents and proximity to services. 
-        Critics noted that the EIS documents failed to mention what would happen to these specific people, assuming only that they would be forced out permanently.</li>
-    </ul>
-</div>
-
-<div>
-    <p>While some of these project areas were predominantly white, the impact on minority communities was often profound due to the loss of specialized cultural hubs.
-    Advocates in Honolulu argued that the planners displayed a "class or cultural bias," failing to recognize that for many residents, Chinatown was a place of "friendliness and mutual help" that they preferred over modernized, middle-class housing.
-    The Pauahi area was ethnically diverse, consisting of 56% Filipino, 12% Chinese, and 12% Hawaiian residents. Community groups pointed out a "wide gap in communication," noting that while the neighborhood was over 50% Chinese-speaking, the agency failed to provide translators or materials in their language.</p>
-</div>
-
-<div>
-    <p>Advocates criticized the inclusion of a 1900 editorial in the project’s documentation, which suggested clearing "old Chinatown" for a "white man's business quarter" while moving the "Asiatic population" to the suburbs.
-    In public comment, community organization Third Arm argued that selecting this editorial reflected a "racist attitude" that continued to emphasize commercialization over the needs of the living community. 
-    Meanwhile, the Legal Aid Society accused planners of "class or cultural bias," arguing they characterized resident attitudes as "don't give a damn" simply because their lifestyle didn't match middle-class standards. 
-    They termed the project’s justification as “arrogant and racist paternalism." The images on the left depict only some of the names and stories of those threatened by the Pauahi displacement.</p>
-</div>
-
-<div>
-    <p>The San Francisco Chronicle writes, in July 1977, “the city finally agreed to pass a resolution to stop all Chinatown evictions; work out with PACE a low-cost housing and store-front plan...; and provide acceptable relocation in Chinatown.”
-    In the Hawai’i People’s Fund’s article “Remembering Chinatown,” the group writes: “The Chinatown residents and activists fighting eviction, through their statements and actions, showed they understood the importance of what they were fighting for and their character, enthusiasm, diligence and adaptability all guided them to a success in unearthing the improper actions and attitudes of Governmental representatives, and in achieving proper relocation provisions and situations for the displaced persons of Hawaiiʻs Chinatown. 
-    We thank them for their sincerity, dedication and hard work for Hawaiiʻs people.”</p>
-</div>
-
-
-
-
-
-
-

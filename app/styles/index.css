@@ -4,8 +4,10 @@
 @import "./northwestern-brand.css";
 @import "./module.css";
 @import "./glossary.css";
+@import "./annotations.css";
 
 @layer properties {
+
   :root,
   :host {
     --font-sans: system-ui, "Segoe UI", Helvetica, Arial, sans-serif;

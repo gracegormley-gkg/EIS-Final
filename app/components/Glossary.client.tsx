@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import {glossaryTerms} from "../js/glossary-terms.js";
+import React, { useEffect } from "react";
+import { glossaryTerms } from "../js/glossary-terms.js";
 import {
   attachGlossaryTooltips,
   highlightGlossaryTerms,
