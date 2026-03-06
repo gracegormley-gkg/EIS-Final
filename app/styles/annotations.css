@@ -1,0 +1,141 @@
+.annotation {
+  position: relative;
+  margin-top: 90vh;
+  margin-bottom: 90vh;
+  margin-left: 55px;
+  max-width: 420px;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .annotation {
+    max-width: 100%;
+    margin-left: 0;
+    margin-top: 99vh;
+    margin-bottom: 99vh;
+  }
+}
+
+@media (min-width: 1400px) {
+  .annotation {
+    max-width: 600px;
+  }
+}
+
+.annotation-content {
+  padding: 20px;
+  background: rgba(207, 206, 194, 0.9);
+  border: 1px solid #fff;
+  position: relative;
+  z-index: 20;
+}
+
+.photo-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -100;
+  pointer-events: none;
+  opacity: 0;  /* Keep this - images start invisible */
+  transition: opacity 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-container.position-fixed {
+  z-index: 0;
+  pointer-events: auto;
+  opacity: 1;  /* Add this - becomes visible when sticky */
+}
+
+.anno-photo {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.annotation-text-holder {
+  position: relative;
+  z-index: 20;
+  max-width: 420px;
+  background: rgba(207, 206, 194, 0.9);
+  padding: 20px;
+  margin: 50vh 0 50vh 55px;
+  border: 1px solid #fff;
+}
+
+@media (max-width: 768px) {
+  .annotation-text-holder {
+    margin: 100vh auto;
+    max-width: 480px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .annotation-text-holder {
+    max-width: 600px;
+  }
+}
+
+.annotation-text-holder h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.annotation-text-holder p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+.below-graphic {
+  background: #f3f5ed;
+  position: relative;
+  z-index: 20;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .below-graphic {
+    padding: 20px 10px;
+  }
+}
+
+.below-graphic h2 {
+  font-size: 2rem;
+  margin: 40px 0 20px 0;
+  color: #2c3e50;
+}
+
+.below-graphic h2:first-child {
+  margin-top: 0;
+}
+
+.below-graphic p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.below-graphic ul {
+  margin-left: 20px;
+  margin-bottom: 30px;
+}
+
+.below-graphic li {
+  margin-bottom: 20px;
+  line-height: 1.8;
+  color: #555;
+}
+
+.below-graphic strong {
+  color: #2c3e50;
+}

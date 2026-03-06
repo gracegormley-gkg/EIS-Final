@@ -17,5 +17,9 @@ export const clientComponents = {
   StoryMapJS: './StoryMapJS.client.tsx',
   ExhibitionModules: './ExhibitionModules.tsx',
   SigmaExample: './SigmaExample.Client.jsx',
+<<<<<<< Updated upstream
+=======
+  Annotations: './annotations.client.tsx',
+>>>>>>> Stashed changes
 };
 
