@@ -5,44 +5,46 @@ type: work
 import {
   Label,
   Summary,
+  Metadata,
   RequiredStatement,
   References,
 } from "@canopy-iiif/app/ui/server";
 
-{/* ── Hero: viewer on left, title/location/summary on right ── */}
-<Container variant="wide">
-  <div className="canopy-work--hero">
-    <div className="canopy-work--viewer">
-      <Viewer iiifContent={props.manifest.id} />
-    </div>
-    <div className="canopy-work--header">
+<Container variant="wide" className="canopy-work--layout">
+  <div className="canopy-work--primary">
+    <Viewer iiifContent={props.manifest.id} />
+    <Glossary 
+      contentSelector=".canopy-work--secondary"
+      glossarySelector="#glossary-section"
+    />
+    <div id="glossary-section"></div>
+  </div>
+  <div className="canopy-work--secondary">
+    <header>
       <Label manifest={props.manifest} as="h1" />
-      <div className="canopy-work--byline">
-        <MetadataField manifest={props.manifest} field="Main Location" display="inline" />
-        <MetadataField manifest={props.manifest} field="Completed" display="inline" prefix="Completed: " />
-      </div>
-      <Summary manifest={props.manifest} as="p" className="canopy-work--summary" />
+      <Summary manifest={props.manifest} as="p" className="canopy-lead" />
+    </header>
+    <div>
+      <References />
+      <Metadata manifest={props.manifest} />
+      <RequiredStatement manifest={props.manifest} />
+      <Id id={props.manifest.id} />
     </div>
   </div>
 </Container>
-
-{/* ── Historical Context: spans the page ── */}
-<Container className="canopy-work--context">
-  <MetadataField manifest={props.manifest} field="Historical Context" label="Historical Context" />
-</Container>
-
-{/* ── People + Attribution: two columns ── */}
-<Container className="canopy-work--footer-grid">
-  <div>
-    <MetadataField manifest={props.manifest} field="Key People" label="Key People" />
-    <References />
-  </div>
-  <div>
-    <RequiredStatement manifest={props.manifest} />
-  </div>
-</Container>
-
-{/* ── Related Items ── */}
+{/* <Container>
+  <Scroll
+    iiifContent={props.manifest.id}
+    options={{
+      offset: 16,
+      figure: {
+        aspectRatio: 1,
+        display: "thumbnail",
+        width: "200px",
+      },
+    }}
+  />
+</Container> */}
 <Container>
   <h2>Related Items</h2>
   <RelatedItems iiifContent={props.manifest.id} top={3} />
