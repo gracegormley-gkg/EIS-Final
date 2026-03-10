@@ -38,7 +38,7 @@
   height: 100vh;
   z-index: -100;
   pointer-events: none;
-  opacity: 0;  /* Keep this - images start invisible */
+  opacity: 0;
   transition: opacity 0.5s;
   display: flex;
   align-items: center;
@@ -48,7 +48,7 @@
 .photo-container.position-fixed {
   z-index: 0;
   pointer-events: auto;
-  opacity: 1;  /* Add this - becomes visible when sticky */
+  opacity: 1;
 }
 
 .anno-photo {
@@ -90,7 +90,11 @@
 .annotation-text-holder p {
   font-size: 1rem;
   line-height: 1.7;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
+}
+
+.annotation-text-holder ul {
+  margin-top: 5px;
 }
 
 .below-graphic {
