@@ -18,5 +18,6 @@ export const clientComponents = {
   ExhibitionModules: './ExhibitionModules.tsx',
   SigmaExample: './SigmaExample.Client.jsx',
   Annotations: './annotations.client.tsx',
+  MetadataField: './MetadataField.tsx',
 };
 
