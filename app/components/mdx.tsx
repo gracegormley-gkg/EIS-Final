@@ -20,3 +20,7 @@ export const clientComponents = {
   Annotations: './annotations.client.tsx',
 };
 
+export const components = {
+  Example: './Example.tsx',
+  MetadataField: './MetadataField.tsx', // add this
+};

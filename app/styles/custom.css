@@ -1,0 +1,106 @@
+/**
+ * Example custom color variables
+ * @see https://canopy-iiif.github.io/app/docs/theming/tailwind#custom
+ */
+
+/* @layer properties {
+  :root,
+  :host {
+    --color-northwestern-purple: #4e2a84;
+    --color-accent-700: var(--color-northwestern-purple);
+    --color-accent-default: var(--color-northwestern-purple);
+  }
+} */
+
+/* ── Work page layout ── */
+
+/* Hero: viewer left, text right */
+.canopy-work--hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+  padding-top: 1.5rem;
+  padding-bottom: 0;
+}
+
+.canopy-work--viewer {
+  min-width: 0; /* prevent overflow in grid */
+}
+
+.canopy-work--header {
+  min-width: 0;
+}
+
+.canopy-work--header h1 {
+  margin-bottom: 0.25rem;
+}
+
+/* Location • Completed row */
+.canopy-work--byline {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--color-gray-500, #6b7280);
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Summary text — readable but not oversized */
+p.canopy-work--summary {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .canopy-work--hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Historical Context — full page width */
+.canopy-work--context {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+.canopy-work--context .canopy-metadata-field h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.canopy-work--context .canopy-metadata-field p {
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 80ch;
+}
+
+/* People + Attribution — two columns */
+.canopy-work--footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.canopy-work--footer-grid .canopy-metadata-field h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.canopy-work--footer-grid .canopy-metadata-field ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .canopy-work--footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
