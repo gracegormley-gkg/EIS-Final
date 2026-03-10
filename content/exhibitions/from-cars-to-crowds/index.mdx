@@ -172,3 +172,94 @@ import Annotations from '../../../components/annotations.client'
     </div>
 </div>
 
+<div style={{ width: '100%', maxWidth: '1300px', margin: '60px auto', fontFamily: 'sans-serif', padding: '0 20px' }}>
+  {/* Common Main Title */}
+  <h2 style={{ textAlign: 'center', fontSize: '28px', fontWeight: '800', marginBottom: '50px', color: '#4A5564' }}>
+    Air Quality Data in Midtown (CD5) area, 2009-2024
+  </h2>
+
+  <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'flex-start' }}>
+
+    {/* Graph 1: Concentration of fine particles in the air */}
+    <div style={{ flex: '1', minWidth: '350px', maxWidth: '480px', margin: '0 60px 60px 60px' }}>
+      <h3 style={{ textAlign: 'center', fontSize: '18px', fontWeight: 'bold', marginBottom: '8px', color: '#4A5564' }}>
+        Concentration of fine particles in the air
+      </h3>
+      <p style={{ textAlign: 'center', fontSize: '12px', color: '#666', marginBottom: '20px' }}>Annual mean (mcg/m³)</p>
+      <svg viewBox="0 0 500 500" style={{ background: '#fff', borderRadius: '8px', border: '1px solid #eee', overflow: 'visible' }}>
+        {[0, 5, 10, 15, 20].map(v => (
+          <g key={v}>
+            <line x1="60" y1={400 - (v * 17.5)} x2="460" y2={400 - (v * 17.5)} stroke="#f1f5f9" strokeWidth="1" />
+            <text x="50" y={405 - (v * 17.5)} fontSize="11" textAnchor="end" fill="#94a3b8">{v}</text>
+          </g>
+        ))}
+        {(() => {
+          const data = [
+            { yr: 2009, v: 16.1 }, { yr: 2010, v: 15.5 }, { yr: 2011, v: 14.8 }, { yr: 2012, v: 14.2 },
+            { yr: 2013, v: 14.3 }, { yr: 2014, v: 14.2 }, { yr: 2015, v: 12.3 }, { yr: 2016, v: 11.3 },
+            { yr: 2017, v: 10.9 }, { yr: 2018, v: 11.4 }, { yr: 2019, v: 11.5 }, { yr: 2020, v: 9.2 },
+            { yr: 2021, v: 8.9 }, { yr: 2022, v: 9.1 }, { yr: 2023, v: 8.4 }, { yr: 2024, v: 10.5 }
+          ].map((d, i) => ({ ...d, x: Math.round(80 + (i * 25)), y: Math.round(400 - (d.v * 17.5)) }));
+          return (
+            <g>
+              <polyline fill="none" stroke="#4A5564" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" points={data.map(d => `${d.x},${d.y}`).join(' ')} />
+              {data.map((item, i) => (
+                <g key={i} className="group cursor-pointer">
+                  <line x1={item.x} y1="400" x2={item.x} y2={item.y} stroke="#cbd5e1" strokeDasharray="3" className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <circle cx={item.x} cy={item.y} r="5" style={{ fill: '#4A5564' }} className="transition-all group-hover:r-7" />
+                  <text x={item.x} y={item.y - 15} textAnchor="middle" className="opacity-0 group-hover:opacity-100 transition-opacity font-bold text-xs" style={{ fill: '#4A5564', stroke: '#ffffff', strokeWidth: '3px', paintOrder: 'stroke' }}>{item.v}</text>
+                  {/* Label logic: Show 2009, 2014, 2019, 2024 */}
+                  {(item.yr % 5 === 4 || item.yr === 2009) && (
+                    <text x={item.x} y="430" fontSize="11" textAnchor="middle" style={{ fill: '#4A5564' }} fontWeight="600">{item.yr}</text>
+                  )}
+                </g>
+              ))}
+            </g>
+          );
+        })()}
+        <line x1="60" y1="400" x2="470" y2="400" stroke="#4A5564" strokeWidth="2" />
+      </svg>
+    </div>
+
+    {/* Graph 2: Concentration of nitrogen dioxide in the air */}
+    <div style={{ flex: '1', minWidth: '350px', maxWidth: '480px', margin: '0 60px 60px 60px' }}>
+      <h3 style={{ textAlign: 'center', fontSize: '18px', fontWeight: 'bold', marginBottom: '8px', color: '#718096' }}>
+        Concentration of nitrogen dioxide in the air
+      </h3>
+      <p style={{ textAlign: 'center', fontSize: '12px', color: '#666', marginBottom: '20px' }}>Annual mean (ppb)</p>
+      <svg viewBox="0 0 500 500" style={{ background: '#fff', borderRadius: '8px', border: '1px solid #eee', overflow: 'visible' }}>
+        {[0, 20, 40, 60].map(v => (
+          <g key={v}>
+            <line x1="60" y1={400 - (v * 5.83)} x2="460" y2={400 - (v * 5.83)} stroke="#f1f5f9" strokeWidth="1" />
+            <text x="50" y={405 - (v * 5.83)} fontSize="11" textAnchor="end" fill="#94a3b8">{v}</text>
+          </g>
+        ))}
+        {(() => {
+          const data = [
+            { yr: 2009, v: 57.7 }, { yr: 2010, v: 52.1 }, { yr: 2011, v: 56.0 }, { yr: 2012, v: 48.1 },
+            { yr: 2013, v: 43.4 }, { yr: 2014, v: 47.8 }, { yr: 2015, v: 40.4 }, { yr: 2016, v: 29.8 },
+            { yr: 2017, v: 26.3 }, { yr: 2018, v: 23.7 }, { yr: 2019, v: 17.1 }, { yr: 2020, v: 16.6 },
+            { yr: 2021, v: 13.9 }, { yr: 2022, v: 16.0 }, { yr: 2023, v: 15.1 }, { yr: 2024, v: 16.5 }
+          ].map((d, i) => ({ ...d, x: Math.round(80 + (i * 25)), y: Math.round(400 - (d.v * 5.83)) }));
+          return (
+            <g>
+              <polyline fill="none" stroke="#718096" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" points={data.map(d => `${d.x},${d.y}`).join(' ')} />
+              {data.map((item, i) => (
+                <g key={i} className="group cursor-pointer">
+                  <line x1={item.x} y1="400" x2={item.x} y2={item.y} stroke="#cbd5e1" strokeDasharray="3" className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <circle cx={item.x} cy={item.y} r="5" style={{ fill: '#718096' }} className="transition-all group-hover:r-7" />
+                  <text x={item.x} y={item.y - 15} textAnchor="middle" className="opacity-0 group-hover:opacity-100 transition-opacity font-bold text-xs" style={{ fill: '#718096', stroke: '#ffffff', strokeWidth: '3px', paintOrder: 'stroke' }}>{item.v}</text>
+                  {/* Label logic: Show 2009, 2014, 2019, 2024 */}
+                  {(item.yr % 5 === 4 || item.yr === 2009) && (
+                    <text x={item.x} y="430" fontSize="11" textAnchor="middle" style={{ fill: '#718096' }} fontWeight="600">{item.yr}</text>
+                  )}
+                </g>
+              ))}
+            </g>
+          );
+        })()}
+        <line x1="60" y1="400" x2="470" y2="400" stroke="#718096" strokeWidth="2" />
+      </svg>
+    </div>
+  </div>
+</div>
