@@ -1,0 +1,66 @@
+import React from "react";
+
+interface IIIFManifest {
+  metadata?: Array<{
+    label: Record<string, string[]>;
+    value: Record<string, string[]>;
+  }>;
+}
+
+interface MetadataFieldProps {
+  manifest: IIIFManifest;
+  /** The metadata label to look up (e.g. "Main Location", "Key People") */
+  field: string;
+  /** Optional heading to display above the value */
+  label?: string;
+  /** Optional prefix string prepended inline to the value */
+  prefix?: string;
+  /** Render as "inline" (no heading, just text) or "block" (with optional label heading) */
+  display?: "inline" | "block";
+}
+
+function getValues(manifest: IIIFManifest, field: string): string[] {
+  if (!manifest.metadata) return [];
+  const entry = manifest.metadata.find((m) =>
+    Object.values(m.label)
+      .flat()
+      .some((v) => v.toLowerCase() === field.toLowerCase())
+  );
+  if (!entry) return [];
+  return Object.values(entry.value).flat().filter(Boolean);
+}
+
+export default function MetadataField({
+  manifest,
+  field,
+  label,
+  prefix,
+  display = "block",
+}: MetadataFieldProps) {
+  const values = getValues(manifest, field);
+  if (values.length === 0) return null;
+
+  if (display === "inline") {
+    return (
+      <span>
+        {prefix && <span>{prefix}</span>}
+        {values.join(", ")}
+      </span>
+    );
+  }
+
+  return (
+    <div className="canopy-metadata-field">
+      {label && <h3>{label}</h3>}
+      {values.length === 1 ? (
+        <p>{values[0]}</p>
+      ) : (
+        <ul>
+          {values.map((v, i) => (
+            <li key={i}>{v}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
