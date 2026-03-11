@@ -77,6 +77,22 @@ p.canopy-work--summary {
   line-height: 1.7;
 }
 
+/* Year tag on search result cards */
+.canopy-figure-result {
+  position: relative;
+}
+
+.canopy-figure-year {
+  display: inline-block;
+  margin-top: 0.35rem;
+  padding: 0.1em 0.5em;
+  border-radius: 0.25em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--color-gray-100, #f3f4f6);
+  color: var(--color-gray-600, #4b5563);
+}
+
 /* Yes / No badges */
 .canopy-badge {
   display: inline-block;

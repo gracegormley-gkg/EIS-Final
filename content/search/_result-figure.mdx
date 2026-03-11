@@ -1,10 +1,19 @@
 import {Card} from "@canopy-iiif/app/ui";
 
-<Card
-  href={props.record?.href}
-  title={props.record?.title || props.record?.href || "Untitled"}
-  src={props.record?.type === "work" ? props.record?.thumbnail : undefined}
-  imgWidth={props.record?.thumbnailWidth}
-  imgHeight={props.record?.thumbnailHeight}
-  aspectRatio={props.thumbnailAspectRatio}
-/>
+export const yearEntry = Array.isArray(props.record?.metadata)
+  ? props.record.metadata.find((m) => m.label === "Year")
+  : null;
+
+<div className="canopy-figure-result">
+  <Card
+    href={props.record?.href}
+    title={props.record?.title || props.record?.href || "Untitled"}
+    src={props.record?.type === "work" ? props.record?.thumbnail : undefined}
+    imgWidth={props.record?.thumbnailWidth}
+    imgHeight={props.record?.thumbnailHeight}
+    aspectRatio={props.thumbnailAspectRatio}
+  />
+  {yearEntry && (
+    <span className="canopy-figure-year">{yearEntry.value}</span>
+  )}
+</div>
