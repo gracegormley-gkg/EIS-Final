@@ -1,4 +1,3 @@
-
 import React, {useEffect, useRef} from "react";
 
 const GRAPH_CDN_URL = "https://esm.sh/graphology@0.25.4?bundle";

@@ -5,6 +5,7 @@
 @import "./module.css";
 @import "./glossary.css";
 @import "./annotations.css";
+@import "./leaf-button.css";
 
 @layer properties {
 
