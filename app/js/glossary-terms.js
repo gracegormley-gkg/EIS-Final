@@ -39,7 +39,6 @@ export const glossaryTerms = {
 	"NSF": "U.S. National Science Foundation",
 	"REA": "U.S. Rural Electrification Administration",
 	"STAT": "U.S. Department of State",
-	"STATE": "U.S. Department of State",
 	"TVA": "Tennessee Valley Authority",
 	"UMTA": "U.S. Urban Mass Transportation Administration",
 	"USAF": "United States Air Force",
