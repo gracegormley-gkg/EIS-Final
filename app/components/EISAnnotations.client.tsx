@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export default function Annotations() {
+export default function EISAnnotations() {
   useEffect(() => {
     const handleScroll = () => {
       document.querySelectorAll('.sticky-annotation').forEach((annotation) => {
