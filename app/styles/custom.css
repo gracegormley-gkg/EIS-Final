@@ -1,3 +1,9 @@
+/* ── Works page palette ──────────────────────────────────────
+   #6A5885  deep purple  (accents, labels, borders)
+   #f2f0f6  light purple tint  (section backgrounds)
+   #D9D9D9  cool gray  (dividers, chip backgrounds)
+   ─────────────────────────────────────────────────────────── */
+
 /* Hero: viewer left, text right */
 .canopy-work--hero {
   display: grid;
@@ -14,10 +20,13 @@
 
 .canopy-work--header {
   min-width: 0;
+  border-top: 3px solid #6A5885;
+  padding-top: 1.25rem;
 }
 
 .canopy-work--header h1 {
   margin-bottom: 0.25rem;
+  color: #2e2040;
 }
 
 /* Location • Completed row */
@@ -25,9 +34,11 @@
   display: flex;
   gap: 1.5rem;
   font-size: 0.9rem;
-  color: var(--color-gray-500, #6b7280);
+  color: #6A5885;
   margin-bottom: 0.75rem;
   flex-wrap: wrap;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #D9D9D9;
 }
 
 /* Summary */
@@ -37,12 +48,50 @@ p.canopy-work--summary {
   margin-top: 0.5rem;
 }
 
+/* Year + Department chips */
+.canopy-work--details {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid #D9D9D9;
+}
+
+.canopy-work--details .canopy-metadata-field {
+  background: #D9D9D9;
+  border-radius: 0.3rem;
+  padding: 0.35rem 0.75rem;
+}
+
+.canopy-work--details .canopy-metadata-field h3 {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6A5885;
+  margin-bottom: 0.15rem;
+}
+
+.canopy-work--details .canopy-metadata-field p {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Glossary output */
+#glossary-section {
+  margin-top: 1rem;
+  border-top: 1px solid #D9D9D9;
+}
+
 /* Historical Context */
 .canopy-work--context {
   margin-top: 2.5rem;
   padding: 2rem 2rem 2rem 2.25rem;
-  background: #e8edf4;
-  border-left: 3px solid #2d4a7a;
+  background: #f2f0f6;
+  border-left: 3px solid #6A5885;
 }
 
 .canopy-work--context .canopy-metadata-field h3 {
@@ -50,7 +99,7 @@ p.canopy-work--summary {
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #2d4a7a;
+  color: #6A5885;
   margin-bottom: 1rem;
 }
 
@@ -60,19 +109,25 @@ p.canopy-work--summary {
   max-width: 76ch;
 }
 
-/* People + Attribution: two columns */
+/* People + Attribution */
 .canopy-work--footer-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  padding: 1.75rem 1.5rem;
+  background: #f2f0f6;
+  border-top: 2px solid #D9D9D9;
 }
 
 .canopy-work--footer-grid .canopy-metadata-field h3 {
-  font-size: 1rem;
+  font-size: 0.68rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6A5885;
+  border-bottom: 1px solid #D9D9D9;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.75rem;
 }
 
 .canopy-work--footer-grid .canopy-metadata-field ul {
@@ -80,6 +135,18 @@ p.canopy-work--summary {
   padding-left: 1.25rem;
   font-size: 0.95rem;
   line-height: 1.7;
+}
+
+/* Related Items */
+.canopy-work--related h2 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #6A5885;
+  border-bottom: 2px solid #D9D9D9;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 /* Year tag on search result cards */
@@ -96,28 +163,6 @@ p.canopy-work--summary {
   font-weight: 600;
   background: var(--color-gray-100, #f3f4f6);
   color: var(--color-gray-600, #4b5563);
-}
-
-/* Year + Department block under summary */
-.canopy-work--details {
-  margin-top: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.canopy-work--details .canopy-metadata-field h3 {
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-gray-500, #6b7280);
-  margin-bottom: 0.2rem;
-}
-
-.canopy-work--details .canopy-metadata-field p {
-  font-size: 0.95rem;
-  margin: 0;
 }
 
 /* Yes / No badges */
@@ -145,5 +190,8 @@ p.canopy-work--summary {
   }
   .canopy-work--footer-grid {
     grid-template-columns: 1fr;
+  }
+  .canopy-work--details {
+    flex-direction: column;
   }
 }
