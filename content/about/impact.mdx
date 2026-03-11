@@ -7,12 +7,8 @@ description: EIS broken down by category, agency and time period
 
 <Container>
 
+## EIS statements in the collection, by category
 <div style={{ margin: '60px 0', fontFamily: 'sans-serif', textAlign: 'center', flexWrap: 'wrap' }}>
-
-  <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '30px' }}>
-    EIS Documents Thematic Categories
-  </h3>
-
   <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', alignItems: 'center', flexWrap: 'wrap' }}>
 
     {/* PIE */}
@@ -148,103 +144,136 @@ description: EIS broken down by category, agency and time period
 
   </div>
 
-  <p style={{ fontSize: '12px', color: '#64748b', marginTop: '20px', fontStyle: 'italic' }}>
-    Hover over each colored slice to see the percentage.
-  </p>
-
 </div>
+Hover over each colored slice to see the percentage.
 
-<div style={{ margin: '60px 0', fontFamily: 'sans-serif', textAlign: 'center' }}>
+## EIS statements in the collection, by year of publication
+<div>
+  {/* CSS for the Hover Effect */}
+  <style>
+    {`
+      .bar-group {
+        cursor: pointer;
+      }
+      /* Hide the label by default */
+      .pop-label {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+        color: #475569;
+        font-weight: 700;
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+      /* Show label and slide it up on hover */
+      .bar-group:hover .pop-label {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* Subtle brighten effect on the bar itself */
+      .bar-item {
+        transition: filter 0.2s ease;
+      }
+      .bar-group:hover .bar-item {
+        filter: brightness(1.1);
+      }
+    `}
+  </style>
 
-  <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '30px' }}>
-    EIS Documents Time Period Breakdown
-  </h3>
+  <div className="bar-chart-container" style={{ 
+    display: 'flex', 
+    alignItems: 'flex-end', 
+    gap: '10px', 
+    height: '280px', 
+    padding: '40px 20px',
+    backgroundColor: '#f8fafc',
+    borderRadius: '12px',
+    fontFamily: 'system-ui, -apple-system, sans-serif'
+  }}>
+    
+    {/* 1970 Bar */}
+    <div className="bar-group" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <span className="pop-label">2</span>
+      <div className="bar-item" style={{ width: '100%', backgroundColor: '#94a3b8', height: '13px', borderRadius: '4px 4px 0 0' }}></div>
+      <span style={{ fontSize: '12px', marginTop: '10px', color: '#64748b' }}>1970</span>
+    </div>
 
-  <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', alignItems: 'center', flexWrap: 'wrap' }}>
+    {/* 1971 Bar */}
+    <div className="bar-group" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <span className="pop-label">2</span>
+      <div className="bar-item" style={{ width: '100%', backgroundColor: '#94a3b8', height: '13px', borderRadius: '4px 4px 0 0' }}></div>
+      <span style={{ fontSize: '12px', marginTop: '10px', color: '#64748b' }}>1971</span>
+    </div>
 
-    {/* PIE */}
-    <svg viewBox='0 0 32 32'
-         style={{ width: '300px', height: '300px', transform: 'rotate(-90deg)' }}>
+    {/* 1972 Bar */}
+    <div className="bar-group" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <span className="pop-label">23</span>
+      <div className="bar-item" style={{ width: '100%', backgroundColor: '#475569', height: '148px', borderRadius: '4px 4px 0 0' }}></div>
+      <span style={{ fontSize: '12px', marginTop: '10px', color: '#64748b' }}>1972</span>
+    </div>
 
-      {/* Background */}
-      <circle r='8' cx='16' cy='16'
-              fill='none'
-              stroke='#f1f5f9'
-              strokeWidth='16' />
+    {/* 1973 Bar */}
+    <div className="bar-group" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <span className="pop-label">31</span>
+      <div className="bar-item" style={{ width: '100%', backgroundColor: '#1e293b', height: '200px', borderRadius: '4px 4px 0 0' }}></div>
+      <span style={{ fontSize: '12px', marginTop: '10px', color: '#64748b' }}>1973</span>
+    </div>
 
-      {/* 1970–1975 52.8% */}
-      <circle
-        r='8' cx='16' cy='16'
-        fill='none'
-        stroke='#83b4b3'
-        strokeWidth='16'
-        pathLength='100'
-        strokeDasharray='52.8 100'>
-        <title>1970–1975 — 52.8%</title>
-      </circle>
+    {/* 1974 Bar */}
+    <div className="bar-group" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <span className="pop-label">11</span>
+      <div className="bar-item" style={{ width: '100%', backgroundColor: '#64748b', height: '71px', borderRadius: '4px 4px 0 0' }}></div>
+      <span style={{ fontSize: '12px', marginTop: '10px', color: '#64748b' }}>1974</span>
+    </div>
 
-      {/* 1976–1979 40.3% */}
-      <circle
-        r='8' cx='16' cy='16'
-        fill='none'
-        stroke='#FFF0C3'
-        strokeWidth='16'
-        pathLength='100'
-        strokeDasharray='40.3 100'
-        strokeDashoffset='-52.8'>
-        <title>1976–1979 — 40.3%</title>
-      </circle>
+    {/* 1975 Bar */}
+    <div className="bar-group" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <span className="pop-label">7</span>
+      <div className="bar-item" style={{ width: '100%', backgroundColor: '#94a3b8', height: '45px', borderRadius: '4px 4px 0 0' }}></div>
+      <span style={{ fontSize: '12px', marginTop: '10px', color: '#64748b' }}>1975</span>
+    </div>
 
-      {/* 1980s 6.9% */}
-      <circle
-        r='8' cx='16' cy='16'
-        fill='none'
-        stroke='#D65A4A'
-        strokeWidth='16'
-        pathLength='100'
-        strokeDasharray='6.9 100'
-        strokeDashoffset='-93.1'>
-        <title>1980s — 6.9%</title>
-      </circle>
+    {/* 1976 Bar */}
+    <div className="bar-group" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <span className="pop-label">26</span>
+      <div className="bar-item" style={{ width: '100%', backgroundColor: '#334155', height: '168px', borderRadius: '4px 4px 0 0' }}></div>
+      <span style={{ fontSize: '12px', marginTop: '10px', color: '#64748b' }}>1976</span>
+    </div>
 
-      {/* Center hole */}
-      <circle r='4.5' cx='16' cy='16' fill='white' />
+    {/* 1977 Bar */}
+    <div className="bar-group" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <span className="pop-label">23</span>
+      <div className="bar-item" style={{ width: '100%', backgroundColor: '#475569', height: '148px', borderRadius: '4px 4px 0 0' }}></div>
+      <span style={{ fontSize: '12px', marginTop: '10px', color: '#64748b' }}>1977</span>
+    </div>
 
-    </svg>
+    {/* 1978 Bar */}
+    <div className="bar-group" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <span className="pop-label">9</span>
+      <div className="bar-item" style={{ width: '100%', backgroundColor: '#94a3b8', height: '58px', borderRadius: '4px 4px 0 0' }}></div>
+      <span style={{ fontSize: '12px', marginTop: '10px', color: '#64748b' }}>1978</span>
+    </div>
 
-    {/* LEGEND */}
-    <div style={{ textAlign: 'left', fontSize: '14px' }}>
+    {/* 1979 Bar */}
+    <div className="bar-group" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <span className="pop-label">0</span>
+      <div className="bar-item" style={{ width: '100%', backgroundColor: '#cbd5e1', height: '4px', borderRadius: '4px 4px 0 0' }}></div>
+      <span style={{ fontSize: '12px', marginTop: '10px', color: '#64748b' }}>1979</span>
+    </div>
 
-      <div style={{ marginBottom: '8px' }}>
-        <span style={{ display: 'inline-block', width: '14px', height: '14px', background: '#83B4B3', marginRight: '8px' }}></span>
-        1970–1975 — 52.8%
-      </div>
-
-      <div style={{ marginBottom: '8px' }}>
-        <span style={{ display: 'inline-block', width: '14px', height: '14px', background: '#FFF0CE', marginRight: '8px' }}></span>
-        1976–1979 — 40.3%
-      </div>
-
-      <div>
-        <span style={{ display: 'inline-block', width: '14px', height: '14px', background: '#D65A4A', marginRight: '8px' }}></span>
-        1980s — 6.9%
-      </div>
-
+    {/* 1980 Bar */}
+    <div className="bar-group" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <span className="pop-label">10</span>
+      <div className="bar-item" style={{ width: '100%', backgroundColor: '#64748b', height: '65px', borderRadius: '4px 4px 0 0' }}></div>
+      <span style={{ fontSize: '12px', marginTop: '10px', color: '#64748b' }}>1980</span>
     </div>
 
   </div>
-
-  <p style={{ fontSize: '12px', color: '#64748b', marginTop: '20px', fontStyle: 'italic' }}>
-    Hover over each colored slice to see the percentage.
-  </p>
-
 </div>
+Hover over each year to reveal the number of EIS statements published each year.
 
+## EIS statements in the collection, by lead agency
 <div style={{ margin: '60px 0', fontFamily: 'sans-serif', textAlign: 'center' }}>
-
-  <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '30px' }}>
-    EIS Documents by Lead Agency
-  </h3>
 
   <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', alignItems: 'center', flexWrap: 'wrap' }}>
 
@@ -371,20 +400,17 @@ description: EIS broken down by category, agency and time period
 
   </div>
 
-  <p style={{ fontSize: '12px', color: '#64748b', marginTop: '20px', fontStyle: 'italic' }}>
-    Hover over each colored slice to see the percentage.
-  </p>
-
 </div>
+
+Hover over each colored slice to see the percentage.
 
 </Container>
 
 ## About the Categories
 
 ### Urban Development & Housing: 29.2% (42 documents)
-
-<p>Projects centered on urban renewal, community block grants, residential or commercial real estate development, and public housing facilities.
-Examples: Downtown revitalization efforts, disaster recovery rebuilding (such as after Hurricane Agnes), apartment complexes, and government buildings.</p>
+Projects centered on urban renewal, community block grants, residential or commercial real estate development and public housing facilities. 
+Examples: Downtown revitalization efforts, disaster recovery rebuilding (such as after Hurricane Agnes), apartment complexes, and government buildings.
 
 Easter Egg EIS documents: Loring Park Pedestrian Greenway (1977): planned redevelopment in Minneapolis featuring 2,000 residential units and 1,050 hotel units, with a "raised pedestrian greenway" designed to completely separate vehicular and pedestrian traffic while physically integrating the downtown area with a local park.
 
@@ -410,7 +436,7 @@ Easter Egg EIS documents: Deep Geothermal Drilling (1972) details an early a
 Regulations and interventions aimed at protecting human health from hazardous chemicals, dangerous products, and occupational hazards.
 Examples: Occupational exposure limits for lead and vinyl chloride, regulations on lead-containing paints, marijuana eradication, and chemical waste incineration.
 
-Easter Egg EIS documents: Chemical Waste Incinerator Ship Project (1976): to deal with the growing volume of toxic chemical wastes like chlorinated hydrocarbons, the government supported developing a fleet of ships to simply incinerate the toxic waste at sea
+Easter Egg EIS documents: Chemical Waste Incinerator Ship Project (1976): to deal with the growing volume of toxic chemical wastes like chlorinated hydrocarbons, the government supported developing a fleet of ships to simply incinerate the toxic waste at sea
 
 
 ### Aerospace & Defense: 4.9% (7 documents)
