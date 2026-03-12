@@ -62,7 +62,7 @@ jobs:
         env:
           CANOPY_CHUNK_SIZE: "25"
           CANOPY_FETCH_CONCURRENCY: "10"
-        run: timeout 300 npm run build || true
+        run: timeout 300 npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

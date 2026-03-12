@@ -1,0 +1,211 @@
+/* ── Works page palette ──────────────────────────────────────
+   #6A5885  deep purple  (accents, labels, borders)
+   #f2f0f6  light purple tint  (section backgrounds)
+   #D9D9D9  cool gray  (dividers, chip backgrounds)
+   ─────────────────────────────────────────────────────────── */
+
+/* Hero: viewer left, text right */
+.canopy-work--hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+  padding-top: 1.5rem;
+  padding-bottom: 0;
+}
+
+.canopy-work--viewer {
+  min-width: 0;
+}
+
+.canopy-work--header {
+  min-width: 0;
+  border-top: 3px solid #6A5885;
+  padding-top: 1.25rem;
+}
+
+.canopy-work--header h1 {
+  margin-bottom: 0.25rem;
+}
+
+/* Location • Completed row */
+.canopy-work--byline {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  color: #6A5885;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #D9D9D9;
+}
+
+/* Summary */
+p.canopy-work--summary {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+
+/* Year + Department chips */
+.canopy-work--details {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid #D9D9D9;
+}
+
+.canopy-work--details .canopy-metadata-field {
+  background: #D9D9D9;
+  border-radius: 0.3rem;
+  padding: 0.35rem 0.75rem;
+}
+
+.canopy-work--details .canopy-metadata-field h3 {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6A5885;
+  margin-bottom: 0.15rem;
+}
+
+.canopy-work--details .canopy-metadata-field p {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Glossary output */
+#glossary-section {
+  margin-top: 1rem;
+  border-top: 1px solid #D9D9D9;
+}
+
+/* Historical Context */
+.canopy-work--context {
+  margin-top: 2.5rem;
+  padding: 2rem 2rem 2rem 2.25rem;
+  background: #f2f0f6;
+  border-left: 3px solid #6A5885;
+}
+
+.canopy-work--context .canopy-metadata-field h3 {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6A5885;
+  margin-bottom: 1rem;
+}
+
+.canopy-work--context .canopy-metadata-field p {
+  font-size: 0.98rem;
+  line-height: 1.9;
+  max-width: 76ch;
+}
+
+/* People + Attribution */
+.canopy-work--footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+  border-top: 2px solid #D9D9D9;
+  align-items: start;
+}
+
+/* Key People — boxed */
+.canopy-work--people {
+  background: #f2f0f6;
+  border-top: 3px solid #6A5885;
+  padding: 1.25rem 1.25rem 1.5rem;
+}
+
+.canopy-work--people .canopy-metadata-field h3 {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6A5885;
+  border-bottom: 1px solid #D9D9D9;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.canopy-work--people .canopy-metadata-field ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* Attribution — plain */
+.canopy-work--attribution {
+  font-size: 0.9rem;
+  color: var(--color-gray-600, #4b5563);
+  line-height: 1.6;
+}
+
+/* Related Items */
+.canopy-work--related h2 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #6A5885;
+  border-bottom: 2px solid #D9D9D9;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Year tag on search result cards */
+.canopy-figure-result {
+  position: relative;
+}
+
+.canopy-figure-year {
+  display: inline-block;
+  margin-top: 0.35rem;
+  padding: 0.1em 0.5em;
+  border-radius: 0.25em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--color-gray-100, #f3f4f6);
+  color: var(--color-gray-600, #4b5563);
+}
+
+/* Yes / No badges */
+.canopy-badge {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+  border-radius: 0.25em;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+
+.canopy-badge--yes {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.canopy-badge--no {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+@media (max-width: 768px) {
+  .canopy-work--hero {
+    grid-template-columns: 1fr;
+  }
+  .canopy-work--footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .canopy-work--details {
+    flex-direction: column;
+  }
+}
