@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { getBasePath } from "../js/getBasePath";
 
 interface LightboxImageProps {
   src: string;
