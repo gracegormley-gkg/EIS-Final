@@ -6,6 +6,7 @@
 @import "./glossary.css";
 @import "./annotations.css";
 @import "./custom.css";
+@import "./leaf-button.css";
 
 @layer properties {
 
