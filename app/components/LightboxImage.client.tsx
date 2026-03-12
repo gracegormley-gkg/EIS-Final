@@ -20,13 +20,21 @@ export default function LightboxImage({
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
-    if (open) document.addEventListener("keydown", handleKey);
-    return () => document.removeEventListener("keydown", handleKey);
+    if (open) {
+      document.addEventListener("keydown", handleKey);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
   return (
     <>
-      <div className={`inline-block text-${textPosition}`}>
+      <div className={`inline-image-block text-${textPosition}`}>
         <div className="inline-block-inner">
           <div
             className="inline-block-image"

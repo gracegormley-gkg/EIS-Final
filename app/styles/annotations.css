@@ -1,24 +1,13 @@
 .annotation {
   position: relative;
-  margin-top: 90vh;
-  margin-bottom: 90vh;
-  margin-left: 55px;
-  max-width: 420px;
   z-index: 10;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
   .annotation {
-    max-width: 100%;
-    margin-left: 0;
     margin-top: 99vh;
     margin-bottom: 99vh;
-  }
-}
-
-@media (min-width: 1400px) {
-  .annotation {
-    max-width: 600px;
   }
 }
 
@@ -60,41 +49,33 @@
 .annotation-text-holder {
   position: relative;
   z-index: 20;
-  max-width: 420px;
+  width: 100%;
+  max-width: var(--annotation-max-width, 420px);
   background: rgba(207, 206, 194, 0.9);
   padding: 20px;
-  margin: 50vh 0 50vh 55px;
+  margin-top: var(--annotation-margin-top, 50vh);
+  margin-bottom: var(--annotation-margin-bottom, 50vh);
+  margin-left: var(--annotation-margin-left, 55px);
+  margin-right: var(--annotation-margin-right, auto);
   border: 1px solid #fff;
+  box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
   .annotation-text-holder {
-    margin: 100vh auto;
-    max-width: 480px;
+    --annotation-margin-top: 100vh;
+    --annotation-margin-bottom: 100vh;
+    --annotation-margin-left: auto;
+    --annotation-margin-right: auto;
+    --annotation-max-width: 480px;
+    width: calc(100% - 32px);
   }
 }
 
 @media (min-width: 1400px) {
   .annotation-text-holder {
-    max-width: 600px;
+    --annotation-max-width: 600px;
   }
-}
-
-.annotation-text-holder h2 {
-  font-size: 2rem;
-  margin-bottom: 15px;
-  color: #2c3e50;
-  font-weight: 700;
-}
-
-.annotation-text-holder p {
-  font-size: 1rem;
-  line-height: 1.7;
-  margin-bottom: 5px;
-}
-
-.annotation-text-holder ul {
-  margin-top: 5px;
 }
 
 .below-graphic {
@@ -144,7 +125,6 @@
   color: #2c3e50;
 }
 
-/* ── Inline image+text block ───────────────────────── */
 .inline-block-inner {
   display: flex;
   flex-direction: column;
@@ -194,25 +174,32 @@
     align-items: stretch;
   }
 
-  .inline-block.text-right .inline-block-image,
-  .inline-block.text-left .inline-block-image {
+  .inline-image-block.text-right .inline-block-image,
+  .inline-image-block.text-left .inline-block-image {
     width: 55%;
     flex-shrink: 0;
   }
 
-  .inline-block.text-right .annotation-text-holder,
-  .inline-block.text-left .annotation-text-holder {
+  .inline-image-block.text-right .annotation-text-holder,
+  .inline-image-block.text-left .annotation-text-holder {
     width: 45%;
-    margin: 0;        /* override the 50vh top/bottom margins */
+    margin: 0;
   }
 
-  .inline-block.text-left .inline-block-inner {
+  .inline-image-block.text-left .inline-block-inner {
     flex-direction: row-reverse;
   }
 
   .inline-block-image img {
     height: 100%;
     max-height: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .inline-image-block .annotation-text-holder {
+    margin: 0;
+    width: 100%;
   }
 }
 
@@ -255,8 +242,10 @@
   opacity: 1;
 }
 
-@media (max-width: 768px) {
-  .inline-block .annotation-text-holder {
-    margin: 0;
-  }
+.full-spacer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
