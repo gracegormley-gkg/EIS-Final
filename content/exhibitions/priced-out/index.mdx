@@ -16,33 +16,25 @@ description: The history of urban renewal in the United States.
         A major point of conflict in these stories across the U.S. is the struggle to define what is "historic" and worth saving.
         </p>
     </div>
+    <ScrollExplore />
 </header>
 
-<div className="annotation full-width sticky-annotation annotation-inline">
-    <div className="photo-container">
-      <img src="/images/priced-out/borough-of-milton-illustrative-site-plan-1.webp" 
-        alt="Borough of Milton Illustrative Site Plan" 
-        className="anno-photo" />
-    </div>
-    <div className="annotation-text-holder">
-      <h2>The "Blight" Label</h2>
-      <p>
-        In Honolulu and St. Joseph, renewal was driven by a desire to eliminate "blight" and "obsolescence." In Honolulu's Chinatown, building inspectors classified structures as 
-        "substandard," justifying the clearance of 29 out of 37 buildings in the Pauahi area. Similarly, in St. Joseph, 63% of structures were deemed substandard to warrant clearance for a modernized "commercial center."!!
-      </p>
-    </div>
+<div class="full-spacer"></div>
+
+<div className="annotation full-width sticky-annotation">
+  <LightboxImage
+    src="/images/priced-out/borough-of-milton-illustrative-site-plan-1.webp"
+    alt="Borough of Milton Illustrative Site Plan"
+    textPosition="right"
+  >
+    <h2>The "Blight" Label</h2>
+    <p>
+      In Honolulu and St. Joseph, renewal was driven by a desire to eliminate "blight" 
+      and "obsolescence." In Honolulu's Chinatown, building inspectors classified structures 
+      as "substandard," justifying the clearance of 29 out of 37 buildings in the Pauahi area.
+    </p>
+  </LightboxImage>
 </div>
-
-<LightboxImage
-  src="/images/priced-out/borough-of-milton-illustrative-site-plan-1.webp"
-  alt="Description"
-  textPosition="right"
->
-  <h2>Heading</h2>
-  <p>text</p>
-</LightboxImage>
-
-test
 
 <div className="annotation full-width sticky-annotation">
     <div className="photo-container">
@@ -132,4 +124,57 @@ Across all stories, the primary impact was the relocation of vulnerable populati
         In the Hawai’i People’s Fund’s article “Remembering Chinatown,” the group writes: “The Chinatown residents and activists fighting eviction, through their statements and actions, showed they understood the importance of what they were fighting for and their character, enthusiasm, diligence and adaptability all guided them to a success in unearthing the improper actions and attitudes of Governmental representatives, and in achieving proper relocation provisions and situations for the displaced persons of Hawaiiʻs Chinatown. We thank them for their sincerity, dedication and hard work for Hawaiiʻs people.”
       </p>
     </div>
+</div>
+
+{/* Left (default) */}
+<div className="annotation full-width sticky-annotation">
+  <div className="photo-container">
+    <img src="/images/priced-out/street.webp" alt="Street" className="anno-photo" />
+  </div>
+  <div className="annotation-text-holder">
+    <h2>Left (default)</h2>
+    <p>No style props needed. Text sits on the left at 420px wide.</p>
+  </div>
+</div>
+
+{/* Right */}
+<div className="annotation full-width sticky-annotation"
+  style={{ "--annotation-margin-left": "auto", "--annotation-margin-right": "55px" }}>
+  <div className="photo-container">
+    <img src="/images/priced-out/map.webp" alt="Map" className="anno-photo" />
+  </div>
+  <div className="annotation-text-holder">
+    <h2>Right-aligned</h2>
+    <p>Text box pushed to the right side of the screen.</p>
+  </div>
+</div>
+
+{/* Center */}
+<div className="annotation full-width sticky-annotation"
+  style={{ "--annotation-margin-left": "auto", "--annotation-margin-right": "auto" }}>
+  <div className="photo-container">
+    <img src="/images/priced-out/downtown-urban-renewal-area-plan.webp" alt="Plan" className="anno-photo" />
+  </div>
+  <div className="annotation-text-holder">
+    <h2>Centered</h2>
+    <p>Text box centered horizontally.</p>
+  </div>
+</div>
+
+{/* Right, wider box, text near top of screen */}
+<div className="annotation full-width sticky-annotation"
+  style={{
+    "--annotation-margin-left": "auto",
+    "--annotation-margin-right": "55px",
+    "--annotation-max-width": "600px",
+    "--annotation-margin-top": "15vh",
+    "--annotation-margin-bottom": "80vh"
+  }}>
+  <div className="photo-container">
+    <img src="/images/priced-out/yanagawa-statement.webp" alt="Statement" className="anno-photo" />
+  </div>
+  <div className="annotation-text-holder">
+    <h2>Right, wide, near top</h2>
+    <p>600px wide box, anchored toward the top of the viewport with a long scroll duration.</p>
+  </div>
 </div>
