@@ -49,6 +49,11 @@ import {
   <div className="canopy-work--attribution">
     <RequiredStatement manifest={props.manifest} />
     <MetadataField manifest={props.manifest} field="Themes" label="Themes" />
+    {props.manifest.homepage?.[0]?.id && (
+      <a href={props.manifest.homepage[0].id} className="canopy-work--source-link" target="_blank" rel="noreferrer">
+        View original in Northwestern Digital Collections ↗
+      </a>
+    )}
   </div>
 </Container>
 
