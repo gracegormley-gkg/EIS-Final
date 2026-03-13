@@ -19,6 +19,7 @@ export const clientComponents = {
   ExhibitionModules: './ExhibitionModules.tsx',
   SigmaExample: './SigmaExample.Client.jsx',
   EISAnnotations: './EISAnnotations.client.tsx',
+  EISFilterBar: './EISFilterBar.client.tsx',
   LightboxImage: './LightboxImage.client.tsx',
   ScrollExplore: './ScrollExplore.client.tsx',
 };
