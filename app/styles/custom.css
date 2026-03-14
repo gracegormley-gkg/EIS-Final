@@ -218,6 +218,34 @@ p.canopy-work--summary {
   color: #854d0e;
 }
 
+/* ── about/impact bar chart ──────────────────────────────── */
+.bar-group {
+  cursor: pointer;
+}
+
+.pop-label {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  color: #475569;
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.bar-group:hover .pop-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bar-item {
+  transition: filter 0.2s ease;
+}
+
+.bar-group:hover .bar-item {
+  filter: brightness(1.1);
+}
+
 @media (max-width: 768px) {
   .canopy-work--hero {
     grid-template-columns: 1fr;

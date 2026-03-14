@@ -150,36 +150,6 @@ Hover over each colored slice to see the percentage.
 ## EIS statements in the collection, by year of publication
 <div>
   {/* CSS for the Hover Effect */}
-  <style>
-    {`
-      .bar-group {
-        cursor: pointer;
-      }
-      /* Hide the label by default */
-      .pop-label {
-        opacity: 0;
-        transform: translateY(10px);
-        transition: all 0.3s ease;
-        color: #475569;
-        font-weight: 700;
-        font-size: 13px;
-        margin-bottom: 4px;
-      }
-      /* Show label and slide it up on hover */
-      .bar-group:hover .pop-label {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      /* Subtle brighten effect on the bar itself */
-      .bar-item {
-        transition: filter 0.2s ease;
-      }
-      .bar-group:hover .bar-item {
-        filter: brightness(1.1);
-      }
-    `}
-  </style>
-
   <div className="bar-chart-container" style={{ 
     display: 'flex', 
     alignItems: 'flex-end', 
