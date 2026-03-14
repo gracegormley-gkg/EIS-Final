@@ -25,6 +25,7 @@ import {
       <div className="canopy-work--details">
         <MetadataField manifest={props.manifest} field="Year" label="Year" />
         <MetadataField manifest={props.manifest} field="Bureau" label="Department" />
+        <MetadataField manifest={props.manifest} field="Contributor" label="Contributor" />
       </div>
       <div id="glossary-section"></div>
     </div>
@@ -48,11 +49,6 @@ import {
   <div className="canopy-work--attribution">
     <RequiredStatement manifest={props.manifest} />
     <MetadataField manifest={props.manifest} field="Themes" label="Themes" />
-    {props.manifest.homepage?.[0]?.id && (
-      <a href={props.manifest.homepage[0].id} className="canopy-work--source-link" target="_blank" rel="noreferrer">
-        View original in Northwestern Digital Collections ↗
-      </a>
-    )}
   </div>
 </Container>
 

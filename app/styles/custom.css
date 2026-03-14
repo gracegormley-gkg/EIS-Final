@@ -151,14 +151,6 @@ p.canopy-work--summary {
   line-height: 1.6;
 }
 
-.canopy-work--source-link {
-  display: inline-block;
-  margin-top: 1rem;
-  font-size: 0.85rem;
-  color: #6A5885;
-  text-decoration: underline;
-}
-
 /* Related Items */
 .canopy-work--related h2 {
   font-size: 0.85rem;
