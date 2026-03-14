@@ -44,8 +44,9 @@ export default function MetadataField({
     const value = values.join(", ");
     const lower = value.toLowerCase();
     const colorClass =
-      lower === "yes" ? "canopy-badge--yes" :
-      lower === "no" ? "canopy-badge--no" :
+      lower === "yes" || lower === "complete" ? "canopy-badge--complete" :
+      lower === "no" || lower === "never started" || lower === "not started" || lower === "unknown" ? "canopy-badge--not-started" :
+      lower === "incomplete" ? "canopy-badge--incomplete" :
       undefined;
     return (
       <span>

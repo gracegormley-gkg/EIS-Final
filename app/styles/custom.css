@@ -151,6 +151,14 @@ p.canopy-work--summary {
   line-height: 1.6;
 }
 
+.canopy-work--source-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #6A5885;
+  text-decoration: underline;
+}
+
 /* Related Items */
 .canopy-work--related h2 {
   font-size: 0.85rem;
@@ -161,6 +169,11 @@ p.canopy-work--summary {
   border-bottom: 2px solid #D9D9D9;
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
+}
+
+/* Purple outline on tiles */
+.canopy-card {
+  border: 2px solid #D9D9D9;
 }
 
 /* Year tag on search result cards */
@@ -179,7 +192,7 @@ p.canopy-work--summary {
   color: var(--color-gray-600, #4b5563);
 }
 
-/* Yes / No badges */
+/* Status badges */
 .canopy-badge {
   display: inline-block;
   padding: 0.1em 0.5em;
@@ -188,14 +201,21 @@ p.canopy-work--summary {
   font-weight: 600;
 }
 
-.canopy-badge--yes {
+.canopy-badge--yes,
+.canopy-badge--complete {
   background: #dcfce7;
   color: #166534;
 }
 
-.canopy-badge--no {
+.canopy-badge--no,
+.canopy-badge--not-started {
   background: #fee2e2;
   color: #991b1b;
+}
+
+.canopy-badge--incomplete {
+  background: #fef9c3;
+  color: #854d0e;
 }
 
 @media (max-width: 768px) {
@@ -208,4 +228,109 @@ p.canopy-work--summary {
   .canopy-work--details {
     flex-direction: column;
   }
+}
+
+/* ── Filter bar (Works/Search page) ─────────────────────── */
+
+.eis-filter-bar {
+  margin-bottom: 1.5rem;
+}
+
+.eis-filter-bar__tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.eis-filter-bar__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-gray-500, #6b7280);
+  margin-right: 0.25rem;
+}
+
+.eis-filter-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 2rem;
+  border: 1.5px solid #D9D9D9;
+  background: transparent;
+  color: var(--color-gray-700, #374151);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.eis-filter-tab:hover {
+  border-color: #6A5885;
+  color: #6A5885;
+}
+
+.eis-filter-tab--open,
+.eis-filter-tab--active {
+  border-color: #6A5885;
+  background: #f2f0f6;
+  color: #6A5885;
+}
+
+.eis-filter-tab__dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6A5885;
+}
+
+.eis-filter-clear {
+  margin-left: auto;
+  padding: 0.25rem 0.75rem;
+  border: none;
+  background: none;
+  font-size: 0.8rem;
+  color: var(--color-gray-500, #6b7280);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.eis-filter-clear:hover {
+  color: #6A5885;
+}
+
+.eis-filter-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: #f2f0f6;
+  border-radius: 0.4rem;
+  border: 1px solid #D9D9D9;
+}
+
+.eis-filter-pill {
+  padding: 0.25rem 0.75rem;
+  border-radius: 2rem;
+  border: 1px solid #D9D9D9;
+  background: #fff;
+  color: var(--color-gray-700, #374151);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+
+.eis-filter-pill:hover {
+  border-color: #6A5885;
+  color: #6A5885;
+}
+
+.eis-filter-pill--active {
+  background: #6A5885;
+  border-color: #6A5885;
+  color: #fff;
 }
