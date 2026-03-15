@@ -6,6 +6,30 @@ export function Head() {
     <>
       <Meta />
       <Stylesheet />
+      <script dangerouslySetInnerHTML={{__html: `
+(function(){
+  var PREFIX = /^Environmental Impact Statement,\\s+/i;
+  var SUFFIX = /\\s*:\\s*environmental impact statement\\.?\\s*$/i;
+  function clean(t){ return t.replace(PREFIX,'').replace(SUFFIX,''); }
+  function fix(el){
+    el.childNodes.forEach(function(n){
+      if(n.nodeType===3){
+        var c=clean(n.textContent);
+        if(c!==n.textContent) n.textContent=c;
+      } else if(n.nodeType===1){ fix(n); }
+    });
+  }
+  document.addEventListener('DOMContentLoaded',function(){
+    fix(document.body);
+    document.title=clean(document.title);
+  });
+  new MutationObserver(function(ms){
+    ms.forEach(function(m){
+      m.addedNodes.forEach(function(n){ if(n.nodeType===1) fix(n); });
+    });
+  }).observe(document.documentElement,{childList:true,subtree:true});
+})();
+`}} />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link
         rel="preconnect"

@@ -56,8 +56,10 @@ import {
   </div>
 </Container>
 
-{/* ── Related Items ── */}
+{/* ── Related Works ── */}
 <Container className="canopy-work--related">
-  <h2>Related Items</h2>
-  <RelatedItems iiifContent={props.manifest.id} top={3} />
+  <div className="canopy-work--related-header">
+    <h2>Related Works</h2>
+  </div>
+  <EISRelatedWorks manifestId={props.manifest.id} />
 </Container>
