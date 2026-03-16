@@ -3,11 +3,7 @@ site:
   baseUrl: https://nulib-ds.github.io/EIS-Final/
 collection:
   - https://raw.githubusercontent.com/gracegormley-gkg/canumpy-/main/collection-eis-v3.json
-manifest:
-  - https://iiif.vam.ac.uk/collections/O1267239/manifest.json
-  # https://iiif.vam.ac.uk/collections/O755793/manifest.json
-  # https://iiif.vam.ac.uk/collections/O136839/manifest.json
-  # https://iiif.vam.ac.uk/collections/O74660/manifest.json
+
 metadata:
   - Summary
   - Themes
