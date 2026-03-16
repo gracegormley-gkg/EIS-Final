@@ -1,0 +1,32 @@
+.static-exhibition {
+  .exhibition-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .statement {
+    padding: 2rem 4rem 4rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    text-align: center;
+    background: var(--color-accent-100);
+  }
+
+  .callout {
+    margin: 2rem 0;
+    padding: 1rem 2rem;
+    background: var(--color-gray-100);
+  }
+
+  article {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    height: auto;
+
+    > * {
+      width: 50%;
+    }
+  }
+}
