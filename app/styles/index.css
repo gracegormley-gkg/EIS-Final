@@ -8,9 +8,9 @@
 @import "./custom.css";
 @import "./leaf-button.css";
 @import "./scroll-to-explore.css";
+@import "./exhibition.scss";
 
 @layer properties {
-
   :root,
   :host {
     --font-sans: system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
