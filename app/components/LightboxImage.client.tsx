@@ -15,6 +15,7 @@ export default function LightboxImage({
   children,
 }: LightboxImageProps) {
   const [open, setOpen] = useState(false);
+  const resolvedSrc = `${getBasePath()}${src}`;
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -40,7 +41,7 @@ export default function LightboxImage({
             className="inline-block-image"
             onClick={() => setOpen(true)}
           >
-            <img src={src} alt={alt} />
+            <img src={resolvedSrc} alt={alt} />
           </div>
           <div className="annotation-text-holder">
             {children}
@@ -58,7 +59,7 @@ export default function LightboxImage({
           <button className="lightbox-close" onClick={() => setOpen(false)}>
             ✕
           </button>
-          <img src={src} alt={alt} />
+          <img src={resolvedSrc} alt={alt} />
         </div>
       )}
     </>

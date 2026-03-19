@@ -24,5 +24,6 @@ export const clientComponents = {
   EISFeaturedWorks: './EISFeaturedWorks.client.tsx',
   LightboxImage: './LightboxImage.client.tsx',
   ScrollExplore: './ScrollExplore.client.tsx',
+  StickyLightbox: './Stickylightbox.client.tsx',
 };
 
