@@ -3,7 +3,7 @@ import React, {useEffect, useRef, useState} from "react";
 const GRAPH_CDN_URL = "https://esm.sh/graphology@0.25.4?bundle";
 const SIGMA_CDN_URL = "https://esm.sh/sigma@3.0.0?bundle";
 const COLLECTION_URL =
-  "https://raw.githubusercontent.com/gracegormley-gkg/canumpy-/main/collection-eis-v3.json";
+  "https://raw.githubusercontent.com/gracegormley-gkg/canumpy-/refs/heads/main/collection-eis-v4.json";
 
 const CANOPY_BASE_URL = "https://nulib-ds.github.io/EIS-Final";
 
@@ -30,97 +30,129 @@ const themeColors = {
   theme10: "#a21caf",
 };
 
+// Lighten a hex color by mixing it toward white (factor 0–1)
+function lightenColor(hex, factor = 0.45) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  const lr = Math.round(r + (255 - r) * factor);
+  const lg = Math.round(g + (255 - g) * factor);
+  const lb = Math.round(b + (255 - b) * factor);
+  return `#${lr.toString(16).padStart(2, "0")}${lg.toString(16).padStart(2, "0")}${lb.toString(16).padStart(2, "0")}`;
+}
+
+// Return the lightened color for a subtheme. For multi-parent subthemes the
+// dominant parent (most docs) is determined at load time; until then we use
+// the first parent as a placeholder.
+function subthemeColor(sub, dominantParentId) {
+  const pid = dominantParentId ?? sub.parentThemes[0];
+  return lightenColor(themeColors[pid]);
+}
+
+// All unique subthemes with the main theme IDs they belong to
+// parentThemes[0] is the PRIMARY parent — it controls which theme node this
+// subtheme orbits and its color. The rest are secondary relationships.
+// Distribution: theme1→1, theme2→2, theme3→2, theme4→2, theme5→2,
+//               theme6→1, theme7→2, theme8→2, theme9→1, theme10→2
+const subthemes = [
+  {
+    id: "sub_climate_eng",
+    label: "Climate Engineering and Intervention",
+    parentThemes: ["theme6", "theme1"],          // Climate & Weather primary
+  },
+  {
+    id: "sub_community_res",
+    label: "Community Resistance and Activism",
+    parentThemes: ["theme8", "theme3", "theme4", "theme5"], // Place-Based Conflicts primary
+  },
+  {
+    id: "sub_energy_dist",
+    label: "Energy Distribution and Consumption",
+    parentThemes: ["theme3", "theme4", "theme5"],           // Energy Systems primary
+  },
+  {
+    id: "sub_energy_ext",
+    label: "Energy Extraction and Production",
+    parentThemes: ["theme3", "theme1", "theme2", "theme5", "theme8"], // Energy Systems primary
+  },
+  {
+    id: "sub_env_reg",
+    label: "Environmental Regulation and Policy",
+    parentThemes: ["theme9", "theme2"],          // Governance primary
+  },
+  {
+    id: "sub_habitat",
+    label: "Habitat Conservation and Biodiversity",
+    parentThemes: ["theme2", "theme1", "theme4", "theme5", "theme9"], // Wildlife primary
+  },
+  {
+    id: "sub_housing",
+    label: "Housing, Planning, and Built Environment",
+    parentThemes: ["theme5", "theme3"],          // Urban Development primary
+  },
+  {
+    id: "sub_human_wildlife",
+    label: "Human–Wildlife Interactions",
+    parentThemes: ["theme2"],                    // Wildlife (only parent)
+  },
+  {
+    id: "sub_indigenous",
+    label: "Indigenous Knowledge and Environmental Stewardship",
+    parentThemes: ["theme10", "theme5"],         // Indigenous Narratives primary
+  },
+  {
+    id: "sub_industrial",
+    label: "Industrial Manufacturing and Pollution",
+    parentThemes: ["theme7", "theme3"],          // Industrial Production primary
+  },
+  {
+    id: "sub_infra",
+    label: "Infrastructure Impacts on Landscapes",
+    parentThemes: ["theme4", "theme1", "theme2", "theme3"], // Transportation primary
+  },
+  {
+    id: "sub_land_rights",
+    label: "Land Rights and Displacement",
+    parentThemes: ["theme8", "theme4", "theme5"], // Place-Based Conflicts primary
+  },
+  {
+    id: "sub_mobility",
+    label: "Mobility Networks and Connectivity",
+    parentThemes: ["theme4", "theme1", "theme2", "theme3", "theme5", "theme8"], // Transportation primary
+  },
+  {
+    id: "sub_resource",
+    label: "Resource Extraction and Material Flows",
+    parentThemes: ["theme7"],                    // Industrial (only parent)
+  },
+  {
+    id: "sub_sovereignty",
+    label: "Sovereignty, Rights, and Self-Determination",
+    parentThemes: ["theme10"],                   // Indigenous (only parent)
+  },
+  {
+    id: "sub_urban_exp",
+    label: "Urban Expansion and Land Use Change",
+    parentThemes: ["theme5", "theme1", "theme2", "theme3", "theme4", "theme10"], // Urban Development primary
+  },
+  {
+    id: "sub_water_infra",
+    label: "Water Infrastructure and Management",
+    parentThemes: ["theme1", "theme2", "theme3", "theme4", "theme5", "theme6"], // Water Systems primary
+  },
+];
+
 const themes = [
-  {
-    id: "theme1",
-    label: "Water Systems",
-    subnodes: [
-      {id: "theme1_1", label: "Rivers & Streams"},
-      {id: "theme1_2", label: "Groundwater"},
-      {id: "theme1_3", label: "Wetlands"},
-    ],
-  },
-  {
-    id: "theme2",
-    label: "Wildlife and Natural Areas",
-    subnodes: [
-      {id: "theme2_1", label: "Protected Areas"},
-      {id: "theme2_2", label: "Endangered Species"},
-    ],
-  },
-  {
-    id: "theme3",
-    label: "Energy Systems",
-    subnodes: [
-      {id: "theme3_1", label: "Renewables"},
-      {id: "theme3_2", label: "Fossil Fuels"},
-      {id: "theme3_3", label: "Nuclear"},
-      {id: "theme3_4", label: "Grid Infrastructure"},
-    ],
-  },
-  {
-    id: "theme4",
-    label: "Transportation Infrastructure",
-    subnodes: [
-      {id: "theme4_1", label: "Road Transport"},
-      {id: "theme4_2", label: "Rail Transport"},
-      {id: "theme4_3", label: "Air Transport"},
-    ],
-  },
-  {
-    id: "theme5",
-    label: "Urban Development",
-    subnodes: [
-      {id: "theme5_1", label: "Housing"},
-      {id: "theme5_2", label: "Zoning"},
-    ],
-  },
-  {
-    id: "theme6",
-    label: "Climate and Weather Modification",
-    subnodes: [
-      {id: "theme6_1", label: "Emissions"},
-      {id: "theme6_2", label: "Geoengineering"},
-      {id: "theme6_3", label: "Extreme Events"},
-      {id: "theme6_4", label: "Carbon Sinks"},
-    ],
-  },
-  {
-    id: "theme7",
-    label: "Industrial Production and Materials",
-    subnodes: [
-      {id: "theme7_1", label: "Mining"},
-      {id: "theme7_2", label: "Manufacturing"},
-      {id: "theme7_3", label: "Waste"},
-    ],
-  },
-  {
-    id: "theme8",
-    label: "Place Based Development Conflicts",
-    subnodes: [
-      {id: "theme8_1", label: "Land Use"},
-      {id: "theme8_2", label: "Resource Rights"},
-    ],
-  },
-  {
-    id: "theme9",
-    label: "Governance and Institutional Control",
-    subnodes: [
-      {id: "theme9_1", label: "Federal Policy"},
-      {id: "theme9_2", label: "Local Policy"},
-      {id: "theme9_3", label: "International Agreements"},
-      {id: "theme9_4", label: "Enforcement"},
-    ],
-  },
-  {
-    id: "theme10",
-    label: "Indigenous Narratives and Sovereignty",
-    subnodes: [
-      {id: "theme10_1", label: "Land Rights"},
-      {id: "theme10_2", label: "Cultural Preservation"},
-      {id: "theme10_3", label: "Self-Governance"},
-    ],
-  },
+  {id: "theme1", label: "Water Systems"},
+  {id: "theme2", label: "Wildlife and Natural Areas"},
+  {id: "theme3", label: "Energy Systems"},
+  {id: "theme4", label: "Transportation Infrastructure"},
+  {id: "theme5", label: "Urban Development"},
+  {id: "theme6", label: "Climate and Weather Modification"},
+  {id: "theme7", label: "Industrial Production and Materials"},
+  {id: "theme8", label: "Place Based Development Conflicts"},
+  {id: "theme9", label: "Governance and Institutional Control"},
+  {id: "theme10", label: "Indigenous Narratives and Sovereignty"},
 ];
 
 const fixedPositions = {
@@ -145,57 +177,49 @@ if (typeof document !== "undefined" && !document.getElementById("sigma-font")) {
   document.head.appendChild(link);
 }
 
-// Helper: extract a metadata value by label from a IIIF manifest
-function getMetaValue(manifest, labelName) {
-  if (!manifest.metadata) return null;
-  const entry = manifest.metadata.find(
+// Extract all values for a metadata field from a v4 collection item
+function getItemMetaValues(item, labelName) {
+  if (!item.metadata) return [];
+  const entry = item.metadata.find(
     (m) => m.label?.none?.[0]?.toLowerCase() === labelName.toLowerCase(),
   );
-  return entry?.value?.none?.[0] ?? null;
-}
-
-// Fetch all manifests in parallel and return enriched doc objects
-async function loadDocuments() {
-  const collectionRes = await fetch(COLLECTION_URL);
-  const collection = await collectionRes.json();
-
-  const manifestItems = collection.items ?? [];
-
-  const manifests = await Promise.all(
-    manifestItems.map(async (item) => {
-      try {
-        const res = await fetch(item.id);
-        const manifest = await res.json();
-        const themesRaw = getMetaValue(manifest, "Themes") ?? "";
-        const docThemes = themesRaw
-          .split(/[,;]/)
-          .map((t) => t.trim())
-          .filter(Boolean);
-
-        return {
-          id: item.id,
-          label: item.label?.none?.[0] ?? "Untitled",
-          summary: item.summary?.none?.[0] ?? "",
-          thumbnail: item.thumbnail?.[0]?.id ?? null,
-          homepage: item.homepage?.[0]?.id ?? null,
-          themes: docThemes,
-        };
-      } catch {
-        return null;
-      }
-    }),
-  );
-
-  return manifests.filter(Boolean);
+  return entry?.value?.none ?? [];
 }
 
 // ─── Document Panel ──────────────────────────────────────────────────────────
 
-function DocPanel({theme, docs, onClose}) {
-  const color = themeColors[theme?.id] ?? "#94a3b8";
-  const filtered = docs.filter((d) =>
-    d.themes.some((t) => t.toLowerCase() === theme?.label?.toLowerCase()),
-  );
+function DocPanel({selectedNode, docs, onClose}) {
+  const isSubtheme = selectedNode?.nodeType === "subtheme";
+
+  // Derive panel accent color
+  let color;
+  if (isSubtheme) {
+    color =
+      selectedNode.parentThemes.length === 1
+        ? themeColors[selectedNode.parentThemes[0]]
+        : "#6642a4";
+  } else {
+    color = themeColors[selectedNode?.id] ?? "#94a3b8";
+  }
+
+  const filtered = isSubtheme
+    ? docs.filter((d) =>
+        d.subthemes.some(
+          (s) => s.toLowerCase() === selectedNode.label.toLowerCase(),
+        ),
+      )
+    : docs.filter((d) =>
+        d.themes.some(
+          (t) => t.toLowerCase() === selectedNode?.label?.toLowerCase(),
+        ),
+      );
+
+  // For subtheme panel: show which parent themes it belongs to
+  const parentThemeLabels = isSubtheme
+    ? selectedNode.parentThemes.map(
+        (tid) => themes.find((t) => t.id === tid)?.label,
+      ).filter(Boolean)
+    : [];
 
   return (
     <div
@@ -241,7 +265,7 @@ function DocPanel({theme, docs, onClose}) {
                 marginBottom: "4px",
               }}
             >
-              Theme
+              {isSubtheme ? "Subtheme" : "Theme"}
             </div>
             <div
               style={{
@@ -251,9 +275,39 @@ function DocPanel({theme, docs, onClose}) {
                 lineHeight: 1.3,
               }}
             >
-              {theme?.label}
+              {selectedNode?.label}
             </div>
-            <div style={{fontSize: "13px", color: "#64748b", marginTop: "4px"}}>
+            {isSubtheme && parentThemeLabels.length > 0 && (
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "4px",
+                  marginTop: "6px",
+                }}
+              >
+                {parentThemeLabels.map((lbl, i) => {
+                  const tid = selectedNode.parentThemes[i];
+                  return (
+                    <span
+                      key={tid}
+                      style={{
+                        fontSize: "10px",
+                        background: themeColors[tid] + "22",
+                        color: themeColors[tid],
+                        border: `1px solid ${themeColors[tid]}44`,
+                        borderRadius: "4px",
+                        padding: "1px 6px",
+                        fontWeight: 500,
+                      }}
+                    >
+                      {lbl}
+                    </span>
+                  );
+                })}
+              </div>
+            )}
+            <div style={{fontSize: "13px", color: "#64748b", marginTop: "6px"}}>
               {filtered.length} document{filtered.length !== 1 ? "s" : ""}
             </div>
           </div>
@@ -288,7 +342,7 @@ function DocPanel({theme, docs, onClose}) {
               textAlign: "center",
             }}
           >
-            No documents found for this theme.
+            No documents found for this {isSubtheme ? "subtheme" : "theme"}.
           </div>
         ) : (
           filtered.map((doc) => (
@@ -399,7 +453,7 @@ function DocPanel({theme, docs, onClose}) {
 
 // ─── Loading overlay ──────────────────────────────────────────────────────────
 
-function LoadingOverlay({progress, total}) {
+function LoadingOverlay() {
   return (
     <div
       style={{
@@ -418,32 +472,6 @@ function LoadingOverlay({progress, total}) {
       <div style={{fontSize: "14px", color: "#475569", fontWeight: 500}}>
         Loading collection…
       </div>
-      {total > 0 && (
-        <>
-          <div
-            style={{
-              width: "200px",
-              height: "4px",
-              background: "#e2e8f0",
-              borderRadius: "2px",
-              overflow: "hidden",
-            }}
-          >
-            <div
-              style={{
-                height: "100%",
-                width: `${Math.round((progress / total) * 100)}%`,
-                background: "#3b82f6",
-                borderRadius: "2px",
-                transition: "width 0.2s",
-              }}
-            />
-          </div>
-          <div style={{fontSize: "12px", color: "#94a3b8"}}>
-            {progress} / {total} manifests
-          </div>
-        </>
-      )}
     </div>
   );
 }
@@ -458,60 +486,109 @@ function docCountToSize(count) {
   return Math.min(MAX, Math.max(MIN, Math.sqrt(count) * 7));
 }
 
+// Apply proportional sizing to theme and subtheme nodes based on document counts.
+// Safe to call before docs are loaded (no-ops if docs is empty).
+function applyDocCountSizes(graph, docs, originalNodeAttrs) {
+  if (!graph || docs.length === 0) return;
+
+  themes.forEach((theme) => {
+    const count = docs.filter((d) =>
+      d.themes.some((t) => t.toLowerCase() === theme.label.toLowerCase()),
+    ).length;
+    const size = docCountToSize(count);
+    if (graph.hasNode(theme.id)) graph.setNodeAttribute(theme.id, "size", size);
+    if (originalNodeAttrs[theme.id]) originalNodeAttrs[theme.id].size = size;
+  });
+
+  const SUB_MIN = 4,
+    SUB_MAX = 10;
+  subthemes.forEach((sub) => {
+    const count = docs.filter((d) =>
+      d.subthemes.some((s) => s.toLowerCase() === sub.label.toLowerCase()),
+    ).length;
+    const size =
+      count <= 0
+        ? SUB_MIN
+        : Math.min(SUB_MAX, Math.max(SUB_MIN, Math.sqrt(count) * 4));
+
+    let dominantId = sub.parentThemes[0];
+    let dominantCount = 0;
+    sub.parentThemes.forEach((tid) => {
+      const theme = themes.find((t) => t.id === tid);
+      if (!theme) return;
+      const n = docs.filter(
+        (d) =>
+          d.subthemes.some(
+            (s) => s.toLowerCase() === sub.label.toLowerCase(),
+          ) &&
+          d.themes.some((t) => t.toLowerCase() === theme.label.toLowerCase()),
+      ).length;
+      if (n > dominantCount) {
+        dominantCount = n;
+        dominantId = tid;
+      }
+    });
+
+    const color = subthemeColor(sub, dominantId);
+    if (graph.hasNode(sub.id)) {
+      graph.setNodeAttribute(sub.id, "size", size);
+      graph.setNodeAttribute(sub.id, "color", color);
+    }
+    if (originalNodeAttrs[sub.id]) {
+      originalNodeAttrs[sub.id].size = size;
+      originalNodeAttrs[sub.id].color = color;
+    }
+  });
+}
+
 export default function SigmaExample({...rest}) {
   const containerRef = useRef(null);
-  const graphRef = useRef(null); // graphology Graph instance
-  const originalNodeAttrsRef = useRef({}); // shared so camera handler stays in sync
-  const [selectedTheme, setSelectedTheme] = useState(null);
+  const graphRef = useRef(null);
+  const originalNodeAttrsRef = useRef({});
+  const docsRef = useRef([]);
+  const wrapperRef = useRef(null);
+  const [selectedNode, setSelectedNode] = useState(null);
   const [docs, setDocs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [loadProgress, setLoadProgress] = useState(0);
-  const [loadTotal, setLoadTotal] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // Load all documents once
+  // Keep isFullscreen in sync when the user presses Escape or uses browser controls
+  useEffect(() => {
+    const onChange = () => setIsFullscreen(!!document.fullscreenElement);
+    document.addEventListener("fullscreenchange", onChange);
+    return () => document.removeEventListener("fullscreenchange", onChange);
+  }, []);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      wrapperRef.current?.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
+  // Load all documents from v4 collection (metadata inline — no per-manifest fetches)
   useEffect(() => {
     let cancelled = false;
 
     async function run() {
       try {
-        const collectionRes = await fetch(COLLECTION_URL);
-        const collection = await collectionRes.json();
-        const manifestItems = collection.items ?? [];
-        setLoadTotal(manifestItems.length);
+        const res = await fetch(COLLECTION_URL);
+        const collection = await res.json();
 
-        let loaded = 0;
-        const results = await Promise.all(
-          manifestItems.map(async (item) => {
-            try {
-              const res = await fetch(item.id);
-              const manifest = await res.json();
-              const themesRaw = getMetaValue(manifest, "Themes") ?? "";
-              const docThemes = themesRaw
-                .split(/[,;]/)
-                .map((t) => t.trim())
-                .filter(Boolean);
-
-              const doc = {
-                id: item.id,
-                label: item.label?.none?.[0] ?? "Untitled",
-                summary: item.summary?.none?.[0] ?? "",
-                thumbnail: item.thumbnail?.[0]?.id ?? null,
-                homepage: item.homepage?.[0]?.id ?? null,
-                themes: docThemes,
-              };
-              loaded++;
-              if (!cancelled) setLoadProgress(loaded);
-              return doc;
-            } catch {
-              loaded++;
-              if (!cancelled) setLoadProgress(loaded);
-              return null;
-            }
-          }),
-        );
+        const results = (collection.items ?? []).map((item) => ({
+          id: item.id,
+          label: item.label?.none?.[0] ?? "Untitled",
+          summary: item.summary?.none?.[0] ?? "",
+          thumbnail: item.thumbnail?.[0]?.id ?? null,
+          homepage: item.homepage?.[0]?.id ?? null,
+          themes: getItemMetaValues(item, "Themes"),
+          subthemes: getItemMetaValues(item, "Subthemes"),
+        }));
 
         if (!cancelled) {
-          setDocs(results.filter(Boolean));
+          docsRef.current = results;
+          setDocs(results);
           setLoading(false);
         }
       } catch (err) {
@@ -526,27 +603,12 @@ export default function SigmaExample({...rest}) {
     };
   }, []);
 
-  // Once docs load, resize theme nodes by document count
+  // Once docs load, resize theme + subtheme nodes by document count and
+  // re-color subthemes based on their dominant parent theme.
+  // Falls back gracefully if graph isn't built yet (handled in graph effect).
   useEffect(() => {
     if (loading || docs.length === 0 || !graphRef.current) return;
-    const graph = graphRef.current;
-    const originalNodeAttrs = originalNodeAttrsRef.current;
-
-    themes.forEach((theme) => {
-      const count = docs.filter((d) =>
-        d.themes.some((t) => t.toLowerCase() === theme.label.toLowerCase()),
-      ).length;
-      const size = docCountToSize(count);
-
-      // Update the live graph node
-      if (graph.hasNode(theme.id)) {
-        graph.setNodeAttribute(theme.id, "size", size);
-      }
-      // Keep originalNodeAttrs in sync so focus/fade logic uses the right base size
-      if (originalNodeAttrs[theme.id]) {
-        originalNodeAttrs[theme.id].size = size;
-      }
-    });
+    applyDocCountSizes(graphRef.current, docs, originalNodeAttrsRef.current);
   }, [docs, loading]);
 
   // Build the Sigma graph
@@ -561,16 +623,18 @@ export default function SigmaExample({...rest}) {
       const graph = new Graph();
       graphRef.current = graph;
 
+      // ── Main theme nodes ──────────────────────────────────────────────────
       themes.forEach((theme) => {
         graph.addNode(theme.id, {
           label: theme.label,
-          size: 20, // placeholder — updated after docs load
+          size: 20,
           color: themeColors[theme.id],
           x: fixedPositions[theme.id].x,
           y: fixedPositions[theme.id].y,
         });
       });
 
+      // ── Theme–theme edges ─────────────────────────────────────────────────
       themes.forEach((themeA, i) => {
         themes.forEach((themeB, j) => {
           if (i < j)
@@ -578,60 +642,91 @@ export default function SigmaExample({...rest}) {
         });
       });
 
+      // ── Build per-theme state ─────────────────────────────────────────────
       const themeState = {};
-
       themes.forEach((theme) => {
-        const center = fixedPositions[theme.id];
-        const subs = theme.subnodes;
-        const subEdgeKeys = [];
-
-        subs.forEach((sub, i) => {
-          graph.addNode(sub.id, {
-            label: sub.label,
-            size: 8,
-            color: themeColors[theme.id],
-            x: center.x + Math.cos((2 * Math.PI * i) / subs.length) * 0.12,
-            y: center.y + Math.sin((2 * Math.PI * i) / subs.length) * 0.12,
-            hidden: true,
-          });
-          subEdgeKeys.push(
-            graph.addEdge(theme.id, sub.id, {
-              color: themeColors[theme.id],
-              size: 1.5,
-              hidden: true,
-            }),
-          );
-          themes.forEach((other) => {
-            if (other.id !== theme.id)
-              subEdgeKeys.push(
-                graph.addEdge(sub.id, other.id, {
-                  color: "#d1d5db",
-                  size: 1,
-                  hidden: true,
-                }),
-              );
-          });
-        });
-
-        subs.forEach((subA, i) => {
-          subs.forEach((subB, j) => {
-            if (i < j)
-              subEdgeKeys.push(
-                graph.addEdge(subA.id, subB.id, {
-                  color: themeColors[theme.id],
-                  size: 1,
-                  hidden: true,
-                }),
-              );
-          });
-        });
-
         themeState[theme.id] = {
-          subnodes: subs,
-          subEdgeKeys,
+          // Only include subthemes whose PRIMARY parent is this theme — these
+          // are the ones positioned (orbiting) near this theme node.
+          subnodes: subthemes.filter((s) => s.parentThemes[0] === theme.id),
+          subEdgeKeys: [],
           expanded: false,
           mainEdgeKeys: [],
         };
+      });
+
+      // ── Subtheme nodes orbiting tightly around their primary parent ───────
+      // Group subthemes by primary parent so we can evenly space the orbit
+      const subsByPrimary = {};
+      subthemes.forEach((sub) => {
+        const pid = sub.parentThemes[0];
+        if (!subsByPrimary[pid]) subsByPrimary[pid] = [];
+        subsByPrimary[pid].push(sub);
+      });
+
+      subthemes.forEach((sub) => {
+        const pid = sub.parentThemes[0];
+        const center = fixedPositions[pid];
+        const siblings = subsByPrimary[pid];
+        const i = siblings.indexOf(sub);
+        const total = siblings.length;
+        const angle = (2 * Math.PI * i) / total - Math.PI / 2; // start at top
+        // Scale radius so clusters with more subnodes don't overlap
+        const RADIUS = 0.09;
+        const cx = center.x + Math.cos(angle) * RADIUS;
+        const cy = center.y + Math.sin(angle) * RADIUS;
+        const color = subthemeColor(sub, null);
+
+        graph.addNode(sub.id, {
+          label: sub.label,
+          size: 7,
+          color,
+          x: cx,
+          y: cy,
+          hidden: true,
+        });
+
+        // Edge from each parent theme → subtheme (hidden while theme node is
+        // hidden, kept for reference only)
+        sub.parentThemes.forEach((tid) => {
+          const key = graph.addEdge(tid, sub.id, {
+            color: "#e2e8f0",
+            size: 0.7,
+            hidden: true,
+          });
+          themeState[tid].subEdgeKeys.push(key);
+        });
+
+        // Edges subtheme → every non-parent theme. These ARE visible when the
+        // primary parent is expanded because both endpoints (subtheme node +
+        // other theme node) remain visible. This is what creates the "web" lines.
+        themes.forEach((other) => {
+          if (!sub.parentThemes.includes(other.id)) {
+            const key = graph.addEdge(sub.id, other.id, {
+              color: "#d1d5db",
+              size: 0.6,
+              hidden: true,
+            });
+            themeState[pid].subEdgeKeys.push(key);
+          }
+        });
+      });
+
+      // Edges between sibling subthemes (same primary parent) — visible when
+      // that theme expands since both sibling nodes are shown together.
+      Object.entries(subsByPrimary).forEach(([pid, subs]) => {
+        subs.forEach((subA, i) => {
+          subs.forEach((subB, j) => {
+            if (i < j) {
+              const key = graph.addEdge(subA.id, subB.id, {
+                color: lightenColor(themeColors[pid], 0.4),
+                size: 0.6,
+                hidden: true,
+              });
+              themeState[pid].subEdgeKeys.push(key);
+            }
+          });
+        });
       });
 
       renderer = new Sigma(graph, containerRef.current, {
@@ -641,19 +736,21 @@ export default function SigmaExample({...rest}) {
         labelColor: {color: "#1e293b"},
         labelBackgroundColor: "rgba(255,255,255,0.85)",
         labelPadding: 4,
-        labelRenderedSizeThreshold: 1,
+        labelRenderedSizeThreshold: 3,
         labelSizeRatio: 3,
         zoomToSizeRatioFunction: (x) => x,
       });
 
+      // Compute mainEdgeKeys (edges to other themes, not to subthemes)
+      const subIds = new Set(subthemes.map((s) => s.id));
       themes.forEach((theme) => {
         const state = themeState[theme.id];
-        const subIds = new Set(state.subnodes.map((s) => s.id));
         state.mainEdgeKeys = graph
           .edges(theme.id)
           .filter((key) => !subIds.has(graph.opposite(theme.id, key)));
       });
 
+      // ── Visual state ──────────────────────────────────────────────────────
       const FADED_NODE_COLOR = "#d1d5db";
       const FADED_EDGE_COLOR = "#e5e7eb";
       const FADED_NODE_SIZE_FACTOR = 0.85;
@@ -661,10 +758,12 @@ export default function SigmaExample({...rest}) {
       const originalNodeAttrs = originalNodeAttrsRef.current;
       themes.forEach((theme) => {
         originalNodeAttrs[theme.id] = {color: themeColors[theme.id], size: 20};
-        theme.subnodes.forEach((sub) => {
-          originalNodeAttrs[sub.id] = {color: themeColors[theme.id], size: 8};
-        });
       });
+      subthemes.forEach((sub) => {
+        originalNodeAttrs[sub.id] = {color: subthemeColor(sub, null), size: 7};
+      });
+      // If docs already loaded before graph was built, apply sizes immediately
+      applyDocCountSizes(graph, docsRef.current, originalNodeAttrs);
       const originalEdgeAttrs = {};
       graph.edges().forEach((key) => {
         originalEdgeAttrs[key] = {
@@ -685,18 +784,18 @@ export default function SigmaExample({...rest}) {
             "size",
             originalNodeAttrs[theme.id].size,
           );
-          theme.subnodes.forEach((sub) => {
-            graph.setNodeAttribute(
-              sub.id,
-              "color",
-              originalNodeAttrs[sub.id].color,
-            );
-            graph.setNodeAttribute(
-              sub.id,
-              "size",
-              originalNodeAttrs[sub.id].size,
-            );
-          });
+        });
+        subthemes.forEach((sub) => {
+          graph.setNodeAttribute(
+            sub.id,
+            "color",
+            originalNodeAttrs[sub.id].color,
+          );
+          graph.setNodeAttribute(
+            sub.id,
+            "size",
+            originalNodeAttrs[sub.id].size,
+          );
         });
         graph.edges().forEach((key) => {
           graph.setEdgeAttribute(key, "color", originalEdgeAttrs[key].color);
@@ -726,7 +825,7 @@ export default function SigmaExample({...rest}) {
               originalNodeAttrs[theme.id].size * FADED_NODE_SIZE_FACTOR,
             );
           }
-          theme.subnodes.forEach((sub) => {
+          themeState[theme.id].subnodes.forEach((sub) => {
             if (!activeNodeIds.has(sub.id)) {
               graph.setNodeAttribute(sub.id, "color", FADED_NODE_COLOR);
               graph.setNodeAttribute(
@@ -785,8 +884,7 @@ export default function SigmaExample({...rest}) {
         );
       };
 
-      const EXPAND_ZOOM_RATIO = 1 / 2.5;
-      const PROXIMITY = 0.35;
+      const EXPAND_ZOOM_RATIO = 1 / 1.8;
 
       renderer.getCamera().on("updated", () => {
         const camera = renderer.getCamera();
@@ -799,6 +897,9 @@ export default function SigmaExample({...rest}) {
           return;
         }
 
+        // Find whichever theme node is nearest to the current viewport center
+        // and expand only that one. No proximity cutoff — always expand the
+        // nearest theme so subthemes appear immediately on any zoom-in.
         const containerWidth = containerRef.current.offsetWidth;
         const containerHeight = containerRef.current.offsetHeight;
         const graphCenter = renderer.viewportToGraph({
@@ -819,12 +920,6 @@ export default function SigmaExample({...rest}) {
           }
         });
 
-        if (!closest || closestDist > PROXIMITY) {
-          themes.forEach((theme) => collapseTheme(theme));
-          resetAllVisuals();
-          return;
-        }
-
         themes.forEach((theme) => {
           if (theme.id === closest.id) expandTheme(theme);
           else collapseTheme(theme);
@@ -833,17 +928,29 @@ export default function SigmaExample({...rest}) {
         applyFocusVisuals(closest);
       });
 
-      // Click a theme node → open doc panel
+      // Click a theme or subtheme node → open doc panel
       renderer.on("clickNode", ({node}) => {
         const theme = themes.find((t) => t.id === node);
+        const sub = subthemes.find((s) => s.id === node);
+
         if (theme) {
-          setSelectedTheme((prev) => (prev?.id === theme.id ? null : theme));
+          setSelectedNode((prev) =>
+            prev?.id === theme.id
+              ? null
+              : {nodeType: "theme", ...theme},
+          );
+        } else if (sub) {
+          setSelectedNode((prev) =>
+            prev?.id === sub.id
+              ? null
+              : {nodeType: "subtheme", ...sub},
+          );
         }
       });
 
       // Click background → close panel
       renderer.on("clickStage", () => {
-        setSelectedTheme(null);
+        setSelectedNode(null);
       });
     };
 
@@ -854,29 +961,75 @@ export default function SigmaExample({...rest}) {
   }, []);
 
   return (
-    <div style={{position: "relative", width: "100%", height: "100%"}}>
-      {loading && <LoadingOverlay progress={loadProgress} total={loadTotal} />}
+    <div
+      ref={wrapperRef}
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "100%",
+        background: isFullscreen ? "#fff" : undefined,
+      }}
+    >
+      {loading && <LoadingOverlay />}
+
+      {/* Fullscreen toggle button */}
+      <button
+        onClick={toggleFullscreen}
+        title={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
+        style={{
+          position: "absolute",
+          top: "12px",
+          right: "12px",
+          zIndex: 15,
+          background: "rgba(255,255,255,0.9)",
+          border: "1px solid #e2e8f0",
+          borderRadius: "6px",
+          width: "32px",
+          height: "32px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+          boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
+          padding: 0,
+        }}
+        aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+      >
+        {isFullscreen ? (
+          // Compress icon
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#475569" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/>
+            <path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/>
+          </svg>
+        ) : (
+          // Expand icon
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#475569" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/>
+            <path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/>
+          </svg>
+        )}
+      </button>
 
       <div
         ref={containerRef}
         style={{
-          width: selectedTheme ? "calc(100% - 360px)" : "100%",
+          width: selectedNode ? "calc(100% - 360px)" : "100%",
           height: "100%",
           transition: "width 0.3s ease",
         }}
         {...rest}
       />
 
-      {selectedTheme && !loading && (
+      {selectedNode && !loading && (
         <DocPanel
-          theme={selectedTheme}
+          selectedNode={selectedNode}
           docs={docs}
-          onClose={() => setSelectedTheme(null)}
+          onClose={() => setSelectedNode(null)}
         />
       )}
 
       {/* Hint */}
-      {!loading && !selectedTheme && (
+      {!loading && !selectedNode && (
         <div
           style={{
             position: "absolute",
@@ -894,7 +1047,7 @@ export default function SigmaExample({...rest}) {
             whiteSpace: "nowrap",
           }}
         >
-          Click a theme node to browse linked documents
+          Click a theme to browse documents · zoom in to reveal subthemes
         </div>
       )}
     </div>
