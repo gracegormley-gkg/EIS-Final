@@ -2,12 +2,11 @@ title: EIS Archives
 site:
   baseUrl: https://nulib-ds.github.io/EIS-Final/
 collection:
-  - https://raw.githubusercontent.com/gracegormley-gkg/canumpy-/refs/heads/main/collection-eis-v4.json
+  - https://raw.githubusercontent.com/gracegormley-gkg/canumpy-/main/collection-eis-v3.json
 
 metadata:
   - Summary
   - Themes
-  - Subthemes
   - Main Location
   - Key People and Groups
   - Historical Context

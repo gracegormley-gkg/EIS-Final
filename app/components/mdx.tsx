@@ -18,7 +18,6 @@ export const clientComponents = {
   StoryMapJS: './StoryMapJS.client.tsx',
   ExhibitionModules: './ExhibitionModules.tsx',
   SigmaExample: './SigmaExample.Client.jsx',
-  EISMap: './EISMap.client.jsx',
   EISAnnotations: './EISAnnotations.client.tsx',
   EISFilterBar: './EISFilterBar.client.tsx',
   EISRelatedWorks: './EISRelatedWorks.client.tsx',
