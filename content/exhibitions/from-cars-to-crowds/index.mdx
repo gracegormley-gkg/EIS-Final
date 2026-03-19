@@ -18,8 +18,9 @@ description: This is athe homepage for the Times Square Broadway exhibition.
   <ScrollExplore />
 </header>
 
-
-<div className="annotation full-width sticky-annotation">
+{/* Right */}
+<div className="annotation full-width sticky-annotation"
+  style={{ "--annotation-margin-left": "auto", "--annotation-margin-right": "55px" }}>
     <div className="photo-container">
       <img src="/images/from-cars-to-crowds/Image_1_1977_Times_Square_Photo_Frederic_Lewis.webp"
         alt="Times Square in 1977." 
@@ -50,7 +51,8 @@ description: This is athe homepage for the Times Square Broadway exhibition.
     </div>
 </div>
 
-<div className="annotation full-width sticky-annotation">
+<div className="annotation full-width sticky-annotation"
+  style={{ "--annotation-margin-left": "auto", "--annotation-margin-right": "55px" }}>
     <div className="photo-container">
       <img src="/images/from-cars-to-crowds/Image_3_Times_Square_Getty_Image.webp"
         alt="Times Square." 
@@ -69,13 +71,15 @@ description: This is athe homepage for the Times Square Broadway exhibition.
     </div>
 </div>
 
-<div className="annotation full-width sticky-annotation">
+{/* Center */}
+<div className="annotation full-width sticky-annotation"
+  style={{ "--annotation-margin-left": "auto", "--annotation-margin-right": "auto" }}>
     <div className="photo-container">
       <img src="/images/from-cars-to-crowds/Image_4_2009_Times_Square_Samantha_Gross_AP.webp"
         alt="Times Square." 
         className="anno-photo" />
     </div>
-    <div className="annotation-text-holder">
+<div className="annotation-text-holder">
       <h2>2009: Conflicting Visions of What Times Square Should Be</h2>
       <p>Although the 1980 EIS proposed an ambitious pedestrian transformation, the Broadway Plaza vision remained largely unrealized for nearly three decades, due to political resistance, business opposition and shifting priorities during the city’s post-1970s economic recovery. In 2009, under Mayor Michael Bloomberg and Transportation Commissioner Janette Sadik-Khan, the city finally revived the idea as a pilot program. Broadway was partially closed to cars using paint, lawn chairs and movable barriers to test whether pedestrian plazas could improve safety, mobility and economic activity in real time. </p>
     </div>
@@ -90,14 +94,14 @@ description: This is athe homepage for the Times Square Broadway exhibition.
     </div>
     <div className="annotation-text-holder">
       <h2>Taxi Drivers: Industry Negotiation</h2>
-      <p>“This is going to hurt all the taxi drivers. The [pedicab] bikers will take away our business because taxis can’t pick up people in front of Macy’s anymore.”
-      — Angelo Cyriaque, Brooklyn cabbie</p>
+      <p><strong>“This is going to hurt all the taxi drivers. The [pedicab] bikers will take away our business because taxis can’t pick up people in front of Macy’s anymore.”</strong>
+      — <i>Angelo Cyriaque, Brooklyn cabbie</i></p>
       <p>This concern, voiced during the 2009 pilot, echoed fierce opposition that had derailed earlier pedestrian plans in New York. In 1973, a proposed “Madison Mall” project failed largely due to pressure from taxi unions. To prevent a similar failure, city planners designed the Broadway Plaza to include a dedicated taxi lane and centralized dispatch operations. While drivers feared a loss of curb access, the officials argued that a structured boarding system would ultimately improve the efficiency of taxi service.</p>
     </div>
     <div className="annotation-text-holder">
     <h2>Residents and Cultural Critics: The Question of Character</h2>
-      <p>"I worry about the character of the mall, with its string of disconnected plazas....they feel like odd leftover spaces."
-      — Nicolai Ouroussoff, New York Times architecture critic</p>
+      <p><strong>"I worry about the character of the mall, with its string of disconnected plazas....they feel like odd leftover spaces."</strong>
+      — <i>Nicolai Ouroussoff, New York Times architecture critic</i></p>
       <p>Some stakeholders in 1980 were even more scathing. Lynne Grey, coordinator of the Virgo Task Force, argued that turning the area into a pedestrian mall would undermine the professional aura of the Theater District. She described the proposed design as a “provincial honky tonk” and a “land grab by the current administration.” 
      In 2009, architecture critics questioned questioned the coherency and aesthetics of  the new plaza. 
      Across both moments, these voices reveal a persistent tension over whether the plaza represents meaningful urban improvement or instead disrupts and diminishes the character that defines the neighborhood.</p>
@@ -107,20 +111,6 @@ description: This is athe homepage for the Times Square Broadway exhibition.
       <p>By the mid-2010s, the pedestrian plazas had been made permanent, rebuilt with granite paving and coordinated street furniture.
      By 2019, officials reported pedestrian traffic had increased by 30%, with approximately 466,000 people walking through Times Square each day. This outcome aligned closely with the 1980 projection that the area would need to accommodate roughly 500,000 daily visitors who were previously overflowing sidewalks and waiting in dangerous intersections. 
      The redesign successfully transitioned Times Square from a transit bottleneck into a major pedestrian destination at the center of the city’s multibillion-dollar tourism economy.</p>
-    </div>
-</div>
-
-<div className="annotation full-width sticky-annotation">
-    <div className="photo-container">
-      <img src="/images/from-cars-to-crowds/Image_5_2024_Times_Square_Karsten_Moran_New_York_Times.webp"
-        alt="Times Square." 
-        className="anno-photo" />
-    </div>
-    <div className="annotation-text-holder">
-    <h2>2025: Congestion Pricing and the Next Phase</h2>
-      <p>Despite the permanent implementation of the plaza in the mid-2010s, the underlying question remained unresolved: how should the city distribute the costs of mobility and environmental improvement? 
-     In 2025, the debate resurfaced, when New York launched the first congestion pricing program in the United States, tolling drivers entering Manhattan’s busiest streets to reduce traffic and raise $15 billion for transit upgrades. 
-     From diverted traffic in 1980 to congestion tolls in 2025, the history of Times Square demonstrates that environmental progress is an ongoing political negotiation over whose mobility is prioritized and whose costs are made visible.</p>
     </div>
 </div>
 
@@ -214,4 +204,18 @@ description: This is athe homepage for the Times Square Broadway exhibition.
       </svg>
     </div>
   </div>
+</div>
+
+<div className="annotation full-width sticky-annotation">
+    <div className="photo-container">
+      <img src="/images/from-cars-to-crowds/Image_5_2024_Times_Square_Karsten_Moran_New_York_Times.webp"
+        alt="Times Square." 
+        className="anno-photo" />
+    </div>
+    <div className="annotation-text-holder">
+    <h2>2025: Congestion Pricing and the Next Phase</h2>
+      <p>Despite the permanent implementation of the plaza in the mid-2010s, the underlying question remained unresolved: how should the city distribute the costs of mobility and environmental improvement? 
+     In 2025, the debate resurfaced, when New York launched the first congestion pricing program in the United States, tolling drivers entering Manhattan’s busiest streets to reduce traffic and raise $15 billion for transit upgrades. 
+     From diverted traffic in 1980 to congestion tolls in 2025, the history of Times Square demonstrates that environmental progress is an ongoing political negotiation over whose mobility is prioritized and whose costs are made visible.</p>
+    </div>
 </div>
