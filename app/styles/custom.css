@@ -278,6 +278,7 @@ p.canopy-work--summary {
 /* Purple outline on tiles */
 .canopy-card {
   border: 2px solid #D9D9D9;
+  border-radius: 0;
 }
 
 /* Year tag on search result cards */

@@ -31,19 +31,6 @@ export function identifyGlossaryMatches(text, glossary) {
   return matches;
 }
 
-export function highlightGlossaryTermsString(text, glossary) {
-  if (!text || !glossary) return text;
-  let html = text;
-  for (const [term, definition] of Object.entries(glossary)) {
-    const regex = buildTermRegex(term);
-    html = html.replace(
-      regex,
-      `<span class="glossary-term" data-definition="${definition}">$1</span>`,
-    );
-  }
-  return html;
-}
-
 export function highlightGlossaryTerms(container, glossary) {
   if (!container || !glossary) return;
   const terms = Object.keys(glossary);

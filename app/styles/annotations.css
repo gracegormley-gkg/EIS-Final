@@ -10,10 +10,6 @@
 }
 
 @media (max-width: 768px) {
-  .banner-image {
-    z-index: 15 !important;
-  }
-
   .annotation {
     margin-top: 99vh;
     margin-bottom: 99vh;

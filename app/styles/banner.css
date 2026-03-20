@@ -15,7 +15,7 @@
 
 .banner-text-left {
   color: white;
-  font-family: "Playfair Display", serif; /* not importing Playfair Display */
+  font-family: "Playfair Display", serif;
   text-align: left;
   max-width: 90%;
 }
@@ -53,7 +53,7 @@
 
 .banner-text-center {
   color: white;
-  font-family: "Playfair Display", serif !important;
+  font-family: "Playfair Display", serif;
   text-align: center;
   max-width: 90%;
   margin: 0 auto;
@@ -114,6 +114,6 @@ header#from-cars-to-crowds-banner {
 header#invisible-hazards-banner {
   background-image: 
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-    url("../images/invisible-hazards/Warrencountymap.png");
+    url("../images/invisible-hazards/Warrencountymap.webp");
      height: 70vh;
 }
