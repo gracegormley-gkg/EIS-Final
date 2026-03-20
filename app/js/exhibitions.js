@@ -15,9 +15,9 @@ export const exhibitions = [
   },
   {
     slug: "invisible-hazards",
-    title: "Invisible Hazards",
+    title: "Environmental Justice Through EIS",
     description:
-      'This exhibition features documents on health hazards of lead-based paint.',
+      "Which communities bear the brunt of environmental harm, and which avoid it?",
     image: "/images/home/chicago-bw.webp"
   },
 ];

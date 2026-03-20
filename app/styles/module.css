@@ -3,11 +3,11 @@
   container-name: module;
   display: flex;
   box-sizing: border-box;
-  border-radius: 25px;
+  border-radius: 25px !important;
   overflow: hidden;
   width: 100%;
   height: 40vh;
-  box-shadow: 2.5px 5px 9px #888888;
+  box-shadow: 2.5px 5px 9px #888888 !important;
   margin-bottom: 2rem;
   text-decoration: none;
 }
